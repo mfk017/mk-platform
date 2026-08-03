@@ -2,18 +2,24 @@
 
 import React from 'react';
 import { SessionProvider } from 'next-auth/react';
-import { AdminSidebar } from '@/components/admin/AdminSidebar';
+import SideNavBar from '@/components/admin/SideNavBar';
+import TopNavBar from '@/components/admin/TopNavBar';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <SessionProvider>
-      <div className="flex flex-col md:flex-row min-h-screen bg-slate-50 font-sans">
-        <AdminSidebar />
-        <main className="flex-1 flex flex-col h-[calc(100vh-64px)] md:h-screen overflow-y-auto">
-          <div className="p-4 md:p-8 flex-1 max-w-7xl mx-auto w-full">
-            {children}
-          </div>
-        </main>
+      <div className="text-on-background font-body-md antialiased overflow-x-hidden bg-[#F4F1DE]">
+        <div className="flex h-screen overflow-hidden">
+          <SideNavBar />
+          
+          <main className="flex-1 md:ml-64 w-full max-w-container-max mx-auto overflow-y-auto relative bg-[#F4F1DE]">
+            <TopNavBar />
+            
+            <div className="px-margin-mobile md:px-gutter py-8 min-h-screen pb-24 md:pb-8">
+              {children}
+            </div>
+          </main>
+        </div>
       </div>
     </SessionProvider>
   );
