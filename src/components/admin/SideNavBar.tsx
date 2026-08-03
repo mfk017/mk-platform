@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { signOut } from 'next-auth/react';
 
 export default function SideNavBar() {
   const pathname = usePathname();
@@ -86,16 +87,25 @@ export default function SideNavBar() {
         </Link>
         
         {/* User Profile Mini */}
-        <div className="mt-4 px-4 flex items-center gap-3">
-          <img
-            alt="Admin profile"
-            className="w-10 h-10 rounded-full object-cover border border-outline-variant/30"
-            src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80"
-          />
-          <div className="overflow-hidden">
-            <p className="font-label-sm text-label-sm text-on-surface truncate">Admin User</p>
-            <p className="font-label-xs text-label-xs text-on-surface-variant truncate">admin@canter.sa</p>
+        <div className="mt-4 px-4 flex items-center justify-between">
+          <div className="flex items-center gap-3 overflow-hidden">
+            <img
+              alt="Admin profile"
+              className="w-10 h-10 rounded-full object-cover border border-outline-variant/30 shrink-0"
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80"
+            />
+            <div className="overflow-hidden">
+              <p className="font-label-sm text-label-sm text-on-surface truncate">Admin User</p>
+              <p className="font-label-xs text-label-xs text-on-surface-variant truncate">admin@canter.sa</p>
+            </div>
           </div>
+          <button
+            onClick={() => signOut({ callbackUrl: '/login' })}
+            className="text-on-surface-variant hover:text-error transition-colors p-2 rounded-lg hover:bg-error-container/20"
+            title="Sign Out"
+          >
+            <span className="material-symbols-outlined text-[20px]">logout</span>
+          </button>
         </div>
       </div>
     </nav>

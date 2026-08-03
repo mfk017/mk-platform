@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 
 export default function DashboardOverview() {
   return (
@@ -120,9 +121,9 @@ export default function DashboardOverview() {
               <span className="material-symbols-outlined text-secondary">schedule</span>
               Today's Schedule
             </h2>
-            <a className="font-label-sm text-label-sm text-primary hover:underline" href="#">
+            <Link className="font-label-sm text-label-sm text-primary hover:underline" href="/dashboard/bookings">
               View All
-            </a>
+            </Link>
           </div>
           <div className="flex-1 overflow-auto">
             <table className="w-full text-left border-collapse">

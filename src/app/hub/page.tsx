@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 
 export default function CustomerHubPage() {
   return (
@@ -46,7 +47,7 @@ export default function CustomerHubPage() {
             
             <div className="space-y-4">
               {/* Session Item 1 */}
-              <div className="flex items-center justify-between p-4 bg-surface-container-low rounded-lg hover:bg-surface-container transition-colors border border-transparent hover:border-outline-variant/30 cursor-pointer">
+              <Link href="/checkout" className="flex items-center justify-between p-4 bg-surface-container-low rounded-lg hover:bg-surface-container transition-colors border border-transparent hover:border-outline-variant/30 cursor-pointer">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-primary-fixed/20 rounded-lg flex items-center justify-center text-primary-container">
                     <span className="material-symbols-outlined">school</span>
@@ -63,7 +64,7 @@ export default function CustomerHubPage() {
                   <div className="font-label-sm text-on-surface">Horse: Apollo</div>
                   <span className="inline-block mt-1 bg-secondary-fixed/50 text-on-secondary-container font-label-xs px-2 py-0.5 rounded">Confirmed</span>
                 </div>
-              </div>
+              </Link>
 
               {/* Session Item 2 */}
               <div className="flex items-center justify-between p-4 bg-surface-container-low rounded-lg hover:bg-surface-container transition-colors border border-transparent hover:border-outline-variant/30 cursor-pointer">

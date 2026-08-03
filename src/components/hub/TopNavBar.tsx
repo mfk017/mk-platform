@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { signOut } from 'next-auth/react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 export default function TopNavBar() {
   const pathname = usePathname();
@@ -39,16 +41,24 @@ export default function TopNavBar() {
             <span className="material-symbols-outlined text-2xl">search</span>
           </button>
           <div className="flex gap-3">
+            <ThemeToggle />
             <button className="text-on-surface-variant hover:text-secondary transition-colors duration-200 scale-95 active:scale-90 transition-transform">
               <span className="material-symbols-outlined">notifications</span>
             </button>
-            <button className="text-on-surface-variant hover:text-secondary transition-colors duration-200 scale-95 active:scale-90 transition-transform">
-              <span className="material-symbols-outlined">account_circle</span>
+            <button 
+              onClick={() => signOut({ callbackUrl: '/login' })}
+              className="text-on-surface-variant hover:text-error transition-colors duration-200 scale-95 active:scale-90 transition-transform"
+              title="Sign Out"
+            >
+              <span className="material-symbols-outlined">logout</span>
             </button>
           </div>
-          <button className="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label-sm text-label-sm hover:bg-surface-tint hover:text-on-primary transition-colors active:scale-90 transition-transform">
+          <Link 
+            href="/login"
+            className="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label-sm text-label-sm hover:bg-surface-tint hover:text-on-primary transition-colors active:scale-90 transition-transform"
+          >
             Sign In
-          </button>
+          </Link>
         </div>
       </div>
     </header>

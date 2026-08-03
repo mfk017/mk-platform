@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 
 export default function SuperAdminPage() {
   return (
@@ -98,7 +99,7 @@ export default function SuperAdminPage() {
         <div className="lg:col-span-2 bg-surface rounded-xl ambient-shadow border border-secondary/10 overflow-hidden flex flex-col">
           <div className="p-6 border-b border-surface-variant flex justify-between items-center bg-tertiary-fixed/30">
             <h3 className="font-title-md text-on-surface">Recent Bookings</h3>
-            <a className="font-label-sm text-primary hover:underline" href="#">View All</a>
+            <Link className="font-label-sm text-primary hover:underline" href="/admin/centers">View All</Link>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">

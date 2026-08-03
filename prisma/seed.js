@@ -295,6 +295,16 @@ async function main() {
     },
   });
 
+  // Create Super Admin (Platform Admin)
+  await prisma.user.create({
+    data: {
+      email: 'superadmin@canter.sa',
+      password_hash: '$2b$10$hTBPdVvx.dH/VkD3sNJ4xugm2GRzO5z1sKdV7iixbmvJJsoafxVSW', // Password: supersecret123
+      name: 'Canter System Admin',
+      role: 'platform_admin',
+    }
+  });
+
   console.log('Database successfully re-seeded with Horses, Trainers & Subsections!');
 }
 
