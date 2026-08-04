@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { ChevronRight } from 'lucide-react';
 import { Language } from '@/lib/i18n';
 
 interface HeroSectionProps {
@@ -10,8 +9,7 @@ interface HeroSectionProps {
   onBookSessionClick: () => void;
 }
 
-// Beautiful equestrian stable image from Unsplash
-const HERO_FALLBACK = 'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=1600&q=80';
+const HERO_FALLBACK = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDrpO7iYZ6nsV6vCsQ3mmncNWdOqHDLC98rPIJli_qeFWfJ2zuqYJxuoSKLMeRi-BR1xGmJ-KlS7kE2wOHunVkHF7wykFr2I2jDWFWz4aCpgLglo01vOramjnuvb9YeUOOn8ZNfTsGrRE7x83c-Abqk-k7FcoOQJRF9-YnHRtcIKTA98JUA_moX_kM7tsjDSaocdPlY-JS22BFiZvf98UiyhCWQXaruUww1IURz5VY-xRjvZmqhwUg';
 
 export function HeroSection({ center, lang, onBookSessionClick }: HeroSectionProps) {
   const isAr = lang === 'ar';
@@ -20,47 +18,31 @@ export function HeroSection({ center, lang, onBookSessionClick }: HeroSectionPro
   const heroImage = center.hero_image_url || HERO_FALLBACK;
 
   return (
-    <section className="hero-section" style={{ minHeight: '520px' }}>
-      {/* Background Image */}
+    <header className="relative w-full h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
       <div
-        className="hero-bg"
+        className="absolute inset-0 bg-cover bg-center w-full h-full z-0"
         style={{ backgroundImage: `url(${heroImage})` }}
       />
-      {/* Gradient Overlay */}
-      <div className="hero-overlay" />
+      <div className="absolute inset-0 bg-primary/40 z-10" />
 
-      {/* Content */}
-      <div className="hero-content" dir={isAr ? 'rtl' : 'ltr'}>
-        <h1 className="hero-title">
-          {isAr ? `مرحباً بكم في ${name}` : `Welcome to ${name}`}
+      <div className="relative z-20 text-center px-4 md:px-12 text-on-primary max-w-4xl mx-auto" dir={isAr ? 'rtl' : 'ltr'}>
+        <h1 className="font-display-lg text-display-lg md:text-6xl lg:text-7xl mb-4 font-bold drop-shadow-lg">
+          {name}
         </h1>
-        <p className="hero-desc">
+        <p className="font-body-lg text-body-lg md:text-xl mb-8 drop-shadow-md text-surface-container-low">
           {desc || (isAr
-            ? 'مركز فروسية احترافي يقدم برامج تدريبية متكاملة في بيئة آمنة ومنظمة. نقدم دروس الفروسية والتدريب الخاص والرحلات الخارجية تحت إشراف مدربين متمرسين.'
-            : 'A professional equestrian center offering structured training programs in a safe and well-managed environment. Providing riding lessons, private training, and outdoor rides under expert supervision.'
+            ? 'مركز فروسية احترافي يقدم برامج تدريبية متكاملة في بيئة آمنة ومنظمة.'
+            : 'Experience premier equestrian services in a world-class facility.'
           )}
         </p>
-        <div className="hero-actions">
-          <button
-            className="btn-hero-primary"
-            onClick={onBookSessionClick}
-            id="hero-book-session-btn"
-          >
-            {isAr ? 'احجز جلسة' : 'Book a Ride'}
-            <ChevronRight size={16} />
-          </button>
-          <a
-            href="#services-section"
-            className="btn-hero-secondary"
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById('services-section')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-          >
-            {isAr ? 'الخدمات' : 'Services'}
-          </a>
-        </div>
+        <button
+          onClick={onBookSessionClick}
+          id="hero-book-session-btn"
+          className="bg-primary text-on-primary font-title-md text-title-md px-8 py-4 rounded hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 shadow-xl shadow-primary/20 transform hover:-translate-y-1"
+        >
+          {isAr ? 'احجز الآن' : 'Book Now'}
+        </button>
       </div>
-    </section>
+    </header>
   );
 }
