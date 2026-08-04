@@ -10,9 +10,11 @@ export async function GET() {
     where: { id: session.user.centerId },
     select: {
       id: true, name_en: true, name_ar: true, slug: true,
-      logo_url: true, description_en: true, description_ar: true,
+      logo_url: true, hero_image_url: true,
+      description_en: true, description_ar: true,
       phone: true, email: true, whatsapp_number: true,
       location_url: true, city: true, vat_enabled: true,
+      instagram_url: true, snapchat_url: true, tiktok_url: true, twitter_url: true,
     },
   });
 
@@ -27,7 +29,8 @@ export async function PUT(req: NextRequest) {
   const {
     name_en, name_ar, description_en, description_ar,
     phone, email, whatsapp_number, location_url, city,
-    logo_url, vat_enabled,
+    logo_url, hero_image_url, vat_enabled,
+    instagram_url, snapchat_url, tiktok_url, twitter_url,
   } = body;
 
   const center = await db.center.update({
@@ -43,7 +46,12 @@ export async function PUT(req: NextRequest) {
       ...(location_url !== undefined && { location_url }),
       ...(city && { city }),
       ...(logo_url !== undefined && { logo_url }),
+      ...(hero_image_url !== undefined && { hero_image_url }),
       ...(vat_enabled !== undefined && { vat_enabled }),
+      ...(instagram_url !== undefined && { instagram_url }),
+      ...(snapchat_url !== undefined && { snapchat_url }),
+      ...(tiktok_url !== undefined && { tiktok_url }),
+      ...(twitter_url !== undefined && { twitter_url }),
     },
   });
 

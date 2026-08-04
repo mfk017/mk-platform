@@ -22,6 +22,11 @@ model Center {
   email                String
   whatsapp_number      String?        @default("+966501234567")
   location_url         String?        @default("https://maps.google.com/?q=Riyadh+Equestrian")
+  instagram_url        String?
+  snapchat_url         String?
+  tiktok_url           String?
+  twitter_url          String?
+  hero_image_url       String?
   city                 String
   bank_account_details String?        // Encrypted details
   vat_enabled          Boolean        @default(true)

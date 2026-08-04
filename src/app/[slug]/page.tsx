@@ -162,7 +162,7 @@ export default function PublicCenterPage() {
         <ContactSection center={centerData} lang={lang} />
       </div>
 
-      <Footer centerName={centerName} lang={lang} socialLinks={centerData.social_links} />
+      <Footer centerName={centerName} lang={lang} center={centerData} />
 
       {selectedService && selectedSlot && (
         <BookingModal

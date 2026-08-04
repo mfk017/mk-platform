@@ -13,6 +13,7 @@ interface CenterSettings {
   name_ar: string;
   slug: string;
   logo_url: string;
+  hero_image_url: string;
   description_en: string;
   description_ar: string;
   phone: string;
@@ -20,6 +21,10 @@ interface CenterSettings {
   whatsapp_number: string;
   location_url: string;
   city: string;
+  instagram_url: string;
+  snapchat_url: string;
+  tiktok_url: string;
+  twitter_url: string;
   vat_enabled: boolean;
 }
 
@@ -141,16 +146,48 @@ export default function SettingsPage() {
               <CardHeader>
                 <CardTitle>Logo & Branding</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-4">
                 <FieldGroup label="Logo URL">
                   <input className={inputClassName} placeholder="https://..." value={form.logo_url || ''} onChange={(e) => handleChange('logo_url', e.target.value)} />
                 </FieldGroup>
                 {form.logo_url && (
-                  <div className="mt-4 flex items-center gap-3">
+                  <div className="flex items-center gap-3">
                     <img src={form.logo_url} alt="Logo preview" className="w-16 h-16 rounded-xl object-cover border border-slate-200" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
                     <span className="text-sm font-medium text-slate-500">Logo preview</span>
                   </div>
                 )}
+                <FieldGroup label="Hero Image URL (storefront background)">
+                  <input className={inputClassName} placeholder="https://..." value={form.hero_image_url || ''} onChange={(e) => handleChange('hero_image_url', e.target.value)} />
+                </FieldGroup>
+                {form.hero_image_url && (
+                  <div className="flex items-center gap-3">
+                    <img src={form.hero_image_url} alt="Hero preview" className="w-32 h-16 rounded-xl object-cover border border-slate-200" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                    <span className="text-sm font-medium text-slate-500">Hero image preview</span>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Social Media */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Social Media & Online Presence</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FieldGroup label="Instagram URL">
+                    <input className={inputClassName} placeholder="https://instagram.com/yourhandle" value={(form as any).instagram_url || ''} onChange={(e) => handleChange('instagram_url', e.target.value)} />
+                  </FieldGroup>
+                  <FieldGroup label="Snapchat URL">
+                    <input className={inputClassName} placeholder="https://snapchat.com/add/yourhandle" value={(form as any).snapchat_url || ''} onChange={(e) => handleChange('snapchat_url', e.target.value)} />
+                  </FieldGroup>
+                  <FieldGroup label="TikTok URL">
+                    <input className={inputClassName} placeholder="https://tiktok.com/@yourhandle" value={(form as any).tiktok_url || ''} onChange={(e) => handleChange('tiktok_url', e.target.value)} />
+                  </FieldGroup>
+                  <FieldGroup label="X (Twitter) URL">
+                    <input className={inputClassName} placeholder="https://x.com/yourhandle" value={(form as any).twitter_url || ''} onChange={(e) => handleChange('twitter_url', e.target.value)} />
+                  </FieldGroup>
+                </div>
               </CardContent>
             </Card>
 

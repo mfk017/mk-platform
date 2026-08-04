@@ -63,60 +63,73 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
   };
 
   return (
-    <div className="schedule-card" dir={isAr ? 'rtl' : 'ltr'}>
+    <div className="bg-surface-container-lowest rounded-2xl shadow-xl shadow-primary/5 border border-secondary/10 p-6 md:p-8" dir={isAr ? 'rtl' : 'ltr'}>
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24, paddingBottom: 16, borderBottom: '1px solid var(--border-card)' }}>
-        <div style={{ width: 40, height: 40, borderRadius: 10, background: 'var(--bg-page)', border: '1px solid var(--border-card)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>
-          <CalendarIcon size={20} />
+      <div className="flex items-center gap-4 mb-8 pb-6 border-b border-outline-variant/30">
+        <div className="w-12 h-12 rounded-xl bg-primary-container/20 border border-primary/10 flex items-center justify-center text-primary shrink-0">
+          <CalendarIcon size={24} strokeWidth={1.5} />
         </div>
         <div>
-          <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+          <h3 className="font-title-md text-title-md text-primary mb-1">
             {t.scheduleTitle}: {isAr ? selectedService.name_ar : selectedService.name_en}
           </h3>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{t.availableSlots}</p>
+          <p className="font-label-sm text-label-sm text-on-surface-variant">{t.availableSlots}</p>
         </div>
       </div>
 
       {filteredSlots.length === 0 ? (
-        <div style={{ padding: '32px', textAlign: 'center', background: 'var(--bg-page)', borderRadius: 12, border: '1px solid var(--border-card)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-          <AlertCircle size={28} style={{ color: 'var(--text-muted)' }} />
-          <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>{t.noSlots}</p>
+        <div className="py-12 flex flex-col items-center justify-center text-center bg-surface-container-lowest rounded-xl border border-dashed border-outline-variant gap-3">
+          <AlertCircle size={32} className="text-on-surface-variant/50" />
+          <p className="font-body-md text-body-md text-on-surface-variant max-w-sm">
+            {t.noSlots}
+          </p>
         </div>
       ) : (
-        <div className="time-slot-grid">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {filteredSlots.map((slot) => {
             const isSelected = selectedSlot?.id === slot.id;
             const remaining = slot.capacity - slot.booked_count;
             const isFull = remaining <= 0;
+
+            let buttonClass = 'relative overflow-hidden rounded-xl border p-4 text-left transition-all duration-300 flex flex-col gap-2 ';
+            if (isFull) {
+              buttonClass += 'bg-surface-container text-on-surface-variant opacity-70 cursor-not-allowed border-outline-variant/30';
+            } else if (isSelected) {
+              buttonClass += 'bg-primary text-on-primary border-primary shadow-lg shadow-primary/20 scale-[1.02] transform';
+            } else {
+              buttonClass += 'bg-surface-container-lowest text-primary border-outline-variant/50 hover:border-primary hover:shadow-md cursor-pointer hover:-translate-y-1';
+            }
 
             return (
               <button
                 key={slot.id}
                 disabled={isFull}
                 onClick={() => onSelectSlot(slot)}
-                className={`time-slot-btn${isSelected ? ' selected' : ''}${isFull ? ' booked' : ''}`}
+                className={buttonClass}
               >
-                <div style={{ fontSize: '0.72rem', color: isSelected ? 'rgba(255,255,255,0.7)' : 'var(--text-muted)', marginBottom: 4 }}>
+                {isSelected && (
+                  <div className="absolute top-0 right-0 w-8 h-8 bg-on-primary/20 rounded-bl-xl flex items-center justify-center">
+                    <CheckCircle2 size={16} className="text-on-primary" />
+                  </div>
+                )}
+                
+                <div className={`font-label-sm text-label-sm uppercase tracking-wider ${isSelected ? 'text-on-primary/80' : 'text-on-surface-variant'}`}>
                   {formatSlotDate(slot.start_time)}
                 </div>
-                <div style={{ fontSize: '0.9rem', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
-                  <Clock size={12} />
+                
+                <div className={`font-headline-lg-mobile text-headline-lg-mobile font-bold flex items-center gap-2 ${isSelected ? 'text-on-primary' : 'text-primary'}`}>
+                  <Clock size={20} className={isSelected ? 'text-on-primary' : 'text-primary'} />
                   {formatSlotTime(slot.start_time)}
                 </div>
-                <div style={{ fontSize: '0.72rem', marginTop: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 3, color: isSelected ? 'rgba(255,255,255,0.6)' : 'var(--text-muted)' }}>
-                  <Users size={10} />
+                
+                <div className={`mt-2 font-label-xs text-label-xs flex items-center gap-1.5 ${isSelected ? 'text-on-primary/90' : 'text-on-surface-variant'}`}>
+                  <Users size={14} />
                   {isFull ? (
-                    <span style={{ color: '#EF4444' }}>{t.fullyBooked}</span>
+                    <span className="text-error font-bold">{t.fullyBooked}</span>
                   ) : (
                     <span>{remaining} {t.capacityRemaining}</span>
                   )}
                 </div>
-                {isSelected && (
-                  <div style={{ marginTop: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 3, fontSize: '0.7rem', color: 'rgba(255,255,255,0.8)' }}>
-                    <CheckCircle2 size={10} />
-                    {t.selected}
-                  </div>
-                )}
               </button>
             );
           })}
@@ -124,4 +137,4 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
       )}
     </div>
   );
-};
+}
