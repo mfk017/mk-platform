@@ -35,9 +35,9 @@ export default function LoginPage() {
       // If there's a callback URL, go there. Otherwise we rely on the middleware 
       // to handle role-based redirection if we send them to /dashboard by default.
       if (callbackUrl) {
-        router.push(callbackUrl);
+        window.location.href = callbackUrl;
       } else {
-        router.push('/dashboard');
+        window.location.href = '/dashboard';
       }
     }
   };
