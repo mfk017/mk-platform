@@ -17,11 +17,11 @@ export default function DashboardOverview() {
           </h1>
         </div>
         <div className="hidden md:flex gap-4">
-          <button className="bg-surface border border-outline-variant text-primary font-label-sm text-label-sm px-4 py-2 rounded-lg hover:bg-surface-container-low transition-colors shadow-sm flex items-center gap-2">
+          <button disabled className="bg-surface border border-outline-variant text-primary font-label-sm text-label-sm px-4 py-2 rounded-lg opacity-50 cursor-not-allowed shadow-sm flex items-center gap-2" title="Coming soon">
             <span className="material-symbols-outlined text-[18px]">calendar_month</span>
             Date Range
           </button>
-          <button className="bg-[#1B4332] text-white font-label-sm text-label-sm px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors shadow-xl shadow-primary/10 flex items-center gap-2">
+          <button disabled className="bg-[#1B4332] text-white font-label-sm text-label-sm px-6 py-2 rounded-lg opacity-50 cursor-not-allowed shadow-xl shadow-primary/10 flex items-center gap-2" title="Coming soon">
             <span className="material-symbols-outlined text-[18px]">add</span>
             New Booking
           </button>
@@ -76,9 +76,9 @@ export default function DashboardOverview() {
               <span className="material-symbols-outlined text-secondary">bedroom_baby</span>
               Stable Status
             </h2>
-            <button className="text-primary hover:text-secondary transition-colors">
+            <Link href="/dashboard/horses" className="text-primary hover:text-secondary transition-colors">
               <span className="material-symbols-outlined">arrow_forward</span>
-            </button>
+            </Link>
           </div>
           <div className="space-y-4">
             <div className="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
@@ -191,10 +191,10 @@ export default function DashboardOverview() {
               <p className="font-body-md text-body-md text-inverse-primary mb-6">
                 Update schedules for the upcoming busy season.
               </p>
-              <button className="bg-white text-primary font-label-sm text-label-sm px-4 py-2 rounded-lg hover:bg-surface-container-low transition-colors shadow-sm flex items-center gap-2 w-max">
+              <Link href="/dashboard/services" className="bg-white text-primary font-label-sm text-label-sm px-4 py-2 rounded-lg hover:bg-surface-container-low transition-colors shadow-sm flex items-center gap-2 w-max">
                 Manage Trainers
                 <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
-              </button>
+              </Link>
             </div>
           </div>
 

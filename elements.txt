@@ -1,0 +1,360 @@
+
+--- src/app/[slug]/page.tsx ---
+<any>
+<any>
+<any>
+<a href="/" className="btn-primary" style={{ display: 'inline-flex' }}>
+<HeroSection center={centerData} lang={lang} onBookSessionClick={handleBookNowClick} />
+
+--- src/app/about/page.tsx ---
+<a href="mailto:support@canter.sa" className="hover:text-violet-400 transition-colors">
+<a href="https://wa.me/966500000000" className="hover:text-emerald-400 transition-colors" target="_blank" rel="noreferrer">
+
+--- src/app/admin/approvals/page.tsx ---
+<input className="pl-10 pr-4 py-2 bg-surface border border-outline-variant rounded-lg font-body-md text-sm focus:border-primary focus:ring-2 focus:rin
+<button className="p-2 text-error hover:bg-error/10 rounded-lg transition-colors" title="Reject">
+<button className="p-2 text-surface-tint hover:bg-surface-tint/10 rounded-lg transition-colors" title="Approve">
+<button className="px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm hover:bg-primary-container transition-colors shadow-sm">
+<button className="p-2 text-error hover:bg-error/10 rounded-lg transition-colors" title="Reject">
+<button className="px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm hover:bg-primary-container transition-colors shadow-sm">
+
+--- src/app/admin/bookings/page.tsx ---
+<any[]>
+<select value={b.status} onChange={(e) =>
+
+--- src/app/admin/centers/page.tsx ---
+<any[]>
+<button onClick={() =>
+<button onClick={() =>
+<a href={`/${c.slug}`} target="_blank" rel="noreferrer" className="text-violet-600 hover:text-violet-700 font-medium text-sm flex items-center gap-1">
+<input type="number" step="0.5" defaultValue={c.commission_rate} onBlur={(e) =>
+<Button size="sm" variant="primary" className="bg-emerald-600 hover:bg-emerald-700 focus:ring-emerald-500" onClick={() =>
+<Button size="sm" variant="destructive" onClick={() =>
+<select value={c.status} onChange={(e) =>
+
+--- src/app/admin/page.tsx ---
+<button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-outline-variant rounded-lg hover:bg-surface-cont
+<select className="appearance-none w-full bg-surface border border-outline-variant text-on-surface py-2 pl-4 pr-10 rounded-lg focus:outline-none focus
+<Link className="font-label-sm text-primary hover:underline" href="/admin/centers">
+<button className="text-label-sm font-label-sm text-primary hover:underline">
+<button className="w-full bg-primary-container text-on-primary-container font-label-sm py-3 rounded-lg hover:bg-primary-container/90 transition-colors
+<button className="mt-2 text-xs font-medium text-error hover:underline">
+<button className="mt-2 text-xs font-medium text-secondary hover:underline">
+
+--- src/app/admin/payouts/page.tsx ---
+<any>
+<Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 focus:ring-emerald-500" onClick={() =>
+
+--- src/app/admin/settings/page.tsx ---
+<input type="number" step="0.5" value={rate} onChange={(e) =>
+<Button onClick={handleSave} isLoading={saving} leftIcon={<Save className="w-4 h-4" />
+
+--- src/app/checkout/page.tsx ---
+<Link href="/hub" className="bg-primary text-on-primary px-8 py-3 rounded-xl font-label-sm hover:bg-primary/90 transition-colors">
+<Link href="/hub" className="text-secondary hover:text-secondary-container flex items-center gap-2 mb-4 font-label-sm w-fit transition-colors group">
+<form onSubmit={handlePayment} className="space-y-6">
+<input type="text" required className="w-full bg-surface border border-outline-variant rounded-xl px-4 py-3 font-body-md focus:border-primary focus:ri
+<input type="text" required className="w-full bg-surface border border-outline-variant rounded-xl px-4 py-3 pl-12 font-body-md focus:border-primary fo
+<input type="text" required className="w-full bg-surface border border-outline-variant rounded-xl px-4 py-3 font-body-md focus:border-primary focus:ri
+<input type="text" required className="w-full bg-surface border border-outline-variant rounded-xl px-4 py-3 font-body-md focus:border-primary focus:ri
+<button type="submit" disabled={loading} className="w-full bg-primary text-on-primary py-4 rounded-xl font-title-md hover:bg-primary/90 transition-col
+
+--- src/app/dashboard/bookings/page.tsx ---
+<any[]>
+<button key={st} onClick={() =>
+<select value={b.status} onChange={(e) =>
+
+--- src/app/dashboard/horses/page.tsx ---
+<button className="bg-surface text-primary border border-secondary/20 hover:bg-secondary/10 px-6 py-2.5 rounded-lg font-label-sm transition-colors fle
+<button className="bg-primary text-on-primary hover:bg-primary/90 px-6 py-2.5 rounded-lg font-label-sm transition-colors flex items-center gap-2">
+<input className="pl-8 pr-3 py-1.5 bg-surface-container rounded-md border border-outline/20 text-label-sm focus:border-primary focus:ring-1 focus:ring
+<button className="text-primary font-label-sm hover:underline">
+
+--- src/app/dashboard/page.tsx ---
+<button className="bg-surface border border-outline-variant text-primary font-label-sm text-label-sm px-4 py-2 rounded-lg hover:bg-surface-container-l
+<button className="bg-[#1B4332] text-white font-label-sm text-label-sm px-6 py-2 rounded-lg hover:bg-opacity-90 transition-colors shadow-xl shadow-pri
+<button className="text-primary hover:text-secondary transition-colors">
+<Link className="font-label-sm text-label-sm text-primary hover:underline" href="/dashboard/bookings">
+<button className="bg-white text-primary font-label-sm text-label-sm px-4 py-2 rounded-lg hover:bg-surface-container-low transition-colors shadow-sm f
+
+--- src/app/dashboard/payouts/page.tsx ---
+<button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-outline-variant rounded-lg hover:bg-surface-cont
+<select className="appearance-none w-full bg-surface border border-outline-variant text-on-surface py-2 pl-4 pr-10 rounded-lg focus:outline-none focus
+<a className="font-label-sm text-primary hover:underline cursor-pointer">
+<button className="w-full bg-primary-container text-on-primary-container font-label-sm py-3 rounded-lg hover:bg-primary-container/90 transition-colors
+<button className="text-primary hover:bg-primary-fixed/30 p-1.5 rounded-md transition-colors" title="Edit Bank Details">
+
+--- src/app/dashboard/schedule/page.tsx ---
+<TopBar title="Schedule Management" subtitle="Manage available time slots for customer bookings" action={ <Button onClick={() =>
+<Button className="w-full" onClick={() =>
+<Button size="sm" variant="outline" className="text-red-500 hover:text-red-600 hover:bg-red-50 hover:border-red-200" onClick={() =>
+<form onSubmit={handleSubmit} className="p-6">
+<select value={formData.service_id} onChange={(e) =>
+<input type="date" required value={formData.date} onChange={(e) =>
+<input type="number" required min="1" value={formData.capacity} onChange={(e) =>
+<input type="time" required value={formData.start_time} onChange={(e) =>
+<input type="time" required value={formData.end_time} onChange={(e) =>
+<Button type="button" variant="ghost" onClick={() =>
+
+--- src/app/dashboard/services/page.tsx ---
+<input className="w-full pl-10 pr-4 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary f
+<button className="flex items-center justify-center space-x-2 px-4 py-2 border border-secondary text-secondary rounded-lg font-label-sm hover:bg-secon
+<button onClick={() =>
+<button className="text-on-surface-variant hover:text-primary transition-colors p-1">
+<button className="text-on-surface-variant hover:text-error transition-colors p-1 ml-2">
+<button className="text-on-surface-variant hover:text-primary transition-colors p-1">
+<button className="text-on-surface-variant hover:text-error transition-colors p-1 ml-2">
+<button className="text-on-surface-variant hover:text-primary transition-colors p-1">
+<button className="text-on-surface-variant hover:text-error transition-colors p-1 ml-2">
+<button className="px-3 py-1 border border-outline-variant rounded-md text-sm text-on-surface-variant hover:bg-surface-container-low disabled:opacity-
+<button className="px-3 py-1 border border-outline-variant rounded-md text-sm text-on-surface-variant hover:bg-surface-container-low">
+<div className="absolute inset-0 bg-on-background/40 backdrop-blur-sm transition-opacity" onClick={() =>
+<button className="text-on-surface-variant hover:text-on-surface p-1 rounded-full hover:bg-surface-container-high transition-colors" onClick={() =>
+<form className="space-y-6">
+<input className="w-full px-3 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:o
+<input className="w-full px-3 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:o
+<select className="w-full px-3 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:
+<input className="w-full pl-12 pr-3 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary f
+<select className="w-full px-3 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:
+<input className="w-full px-3 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:o
+<input defaultChecked className="sr-only peer" type="checkbox" />
+<button className="px-4 py-2 font-label-sm text-primary hover:bg-primary/5 rounded-lg transition-colors" onClick={() =>
+<button className="px-6 py-2 bg-primary text-on-primary font-label-sm rounded-lg hover:bg-primary/90 transition-colors shadow-sm" onClick={() =>
+
+--- src/app/dashboard/settings/page.tsx ---
+<form onSubmit={handleSave} className="space-y-6">
+<input className={inputClassName} value={form.name_en || ''} onChange={(e) =>
+<input className={`${inputClassName} dir-rtl`} value={form.name_ar || ''} onChange={(e) =>
+<input className={inputClassName} value={form.city || ''} onChange={(e) =>
+<input className={`${inputClassName} pl-32 bg-slate-50 text-slate-500`} value={form.slug || ''} readOnly />
+<input type="tel" className={inputClassName} value={form.phone || ''} onChange={(e) =>
+<input type="email" className={inputClassName} value={form.email || ''} onChange={(e) =>
+<input type="tel" className={inputClassName} placeholder="+966501234567" value={form.whatsapp_number || ''} onChange={(e) =>
+<input className={inputClassName} placeholder="https://maps.google.com/..." value={form.location_url || ''} onChange={(e) =>
+<input className={inputClassName} placeholder="https://..." value={form.logo_url || ''} onChange={(e) =>
+<input type="checkbox" className="sr-only" checked={form.vat_enabled || false} onChange={() =>
+
+--- src/app/dashboard/trainers/page.tsx ---
+<button className="hidden md:flex items-center gap-2 bg-primary-container text-on-primary-container font-label-sm px-5 py-2.5 rounded-lg hover:bg-surf
+<button className="text-on-surface-variant hover:text-primary transition-colors">
+<button className="text-on-surface-variant hover:text-primary transition-colors">
+
+--- src/app/hub/book/[id]/page.tsx ---
+<Link href="/hub/catalog" className="hover:text-primary transition-colors">
+<button onClick={() =>
+<button onClick={() =>
+<button onClick={() =>
+<button onClick={() =>
+<button disabled className="min-w-[80px] flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/50 opacity-50 cursor-n
+<button onClick={() =>
+<button onClick={() =>
+<button disabled className="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/50 bg-surface-container-high/30 opa
+<button onClick={() =>
+<div onClick={() =>
+<div onClick={() =>
+<button onClick={() =>
+
+--- src/app/hub/catalog/page.tsx ---
+<select className="bg-surface-container-lowest border border-outline-variant text-on-surface font-label-sm rounded-lg px-4 py-2 focus:ring-2 focus:rin
+<select className="bg-surface-container-lowest border border-outline-variant text-on-surface font-label-sm rounded-lg px-4 py-2 focus:ring-2 focus:rin
+<button className="flex items-center gap-2 bg-surface-container-low border border-outline-variant text-on-surface font-label-sm rounded-lg px-4 py-2 h
+<article className="col-span-1 md:col-span-8 bg-surface-container-lowest rounded-xl shadow-xl shadow-primary/5 border border-secondary/10 overflow-hid
+<Link href="/hub/book/dressage" className="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-sm hover:bg-primary-container transition-colors 
+<article className="col-span-1 md:col-span-4 bg-surface-container-lowest rounded-xl shadow-xl shadow-primary/5 border border-secondary/10 overflow-hid
+<Link href="/hub/book/group" className="border border-secondary text-secondary px-4 py-2 rounded-lg font-label-sm hover:bg-secondary/10 transition-col
+<article className="col-span-1 md:col-span-4 bg-surface-container-lowest rounded-xl shadow-xl shadow-primary/5 border border-secondary/10 overflow-hid
+<Link href="/hub/book/trail" className="border border-secondary text-secondary px-4 py-2 rounded-lg font-label-sm hover:bg-secondary/10 transition-col
+<article className="col-span-1 md:col-span-8 bg-tertiary-fixed rounded-xl shadow-xl shadow-primary/5 border border-tertiary-fixed-dim overflow-hidden 
+<button className="bg-on-tertiary-fixed text-tertiary-fixed px-6 py-2 rounded-lg font-label-sm hover:bg-tertiary-container transition-colors shadow-md
+
+--- src/app/hub/page.tsx ---
+<button className="flex items-center gap-2 font-label-sm text-secondary hover:text-secondary-container transition-colors group">
+<Link href="/checkout" className="flex items-center justify-between p-4 bg-surface-container-low rounded-lg hover:bg-surface-container transition-colo
+<button className="text-inverse-primary hover:text-white transition-colors">
+<button className="w-full mt-6 bg-white text-primary font-label-sm py-3 rounded-lg hover:bg-surface-container-low transition-colors shadow-md">
+<button className="w-full text-center font-label-sm text-secondary hover:text-secondary-container transition-colors py-2 border border-secondary/20 ro
+
+--- src/app/login/page.tsx ---
+<form onSubmit={handleSubmit}>
+<input id="login-email" type="email" value={email} onChange={(e) =>
+<input id="login-password" type={showPw ? 'text' : 'password'} value={password} onChange={(e) =>
+<button type="button" onClick={() =>
+<button id="login-submit" type="submit" disabled={loading} style={{ width: '100%', padding: '12px', borderRadius: 10, background: loading ? 'var(--pri
+
+--- src/app/page.tsx ---
+<Link href="/register" className="bg-white text-black hover:bg-violet-50 px-8 py-3.5 rounded-full text-base font-bold flex items-center gap-2 transiti
+<a href="#demo" className="bg-white/5 border border-white/10 hover:bg-white/10 text-white px-8 py-3.5 rounded-full text-base font-bold flex items-cent
+<Link href="/register" className="relative z-10 block w-full bg-white text-black hover:bg-violet-50 py-4 rounded-xl text-center text-lg font-bold tran
+<Link href="/register" className="bg-violet-600 hover:bg-violet-500 text-white px-10 py-5 rounded-full text-lg font-bold inline-flex items-center gap-
+
+--- src/app/pricing/page.tsx ---
+<Link href="/register" className="bg-white text-black text-center py-4 rounded-xl font-bold hover:bg-violet-50 transition-colors w-full">
+
+--- src/app/register/page.tsx ---
+<Link href="/" className="text-violet-400 font-medium hover:text-violet-300">
+<form onSubmit={handleSubmit} className="space-y-5">
+<input required type="text" value={formData.centerNameAr} onChange={e =>
+<input required type="text" value={formData.centerNameEn} onChange={e =>
+<input required type="text" value={formData.city} onChange={e =>
+<input required type="text" value={formData.ownerName} onChange={e =>
+<input required type="tel" value={formData.phone} onChange={e =>
+<input required type="email" value={formData.email} onChange={e =>
+<input required type="password" value={formData.password} onChange={e =>
+<input type="checkbox" required checked={formData.termsAccepted} onChange={e =>
+<a href="#" className="text-violet-400 underline underline-offset-2">
+<button disabled={loading} type="submit" className="w-full bg-white text-black hover:bg-violet-50 py-4 rounded-xl font-bold text-lg flex items-center 
+
+--- src/components/BookingModal.tsx ---
+<div className="modal-overlay" onClick={onClose}>
+<div className="modal-content" onClick={(e) =>
+<button onClick={onClose} style={{ position: 'absolute', top: 16, [isAr ? 'left' : 'right']: 16, width: 32, height: 32, border: '1px solid var(--borde
+<form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+<input type={field.type} required={field.required} value={field.value} onChange={(e) =>
+<button type="button" onClick={() =>
+<button type="button" onClick={onClose} style={{ padding: '10px 20px', border: '1px solid var(--border-light)', borderRadius: 10, background: 'transpa
+<button type="submit" disabled={isSubmitting} className="btn-primary" style={{ fontSize: '0.875rem' }}>
+
+--- src/components/CenterHero.tsx ---
+<a href="#services-section" className="btn-outline-amber text-xs py-1.5 px-3 flex-shrink-0">
+
+--- src/components/ConfirmationModal.tsx ---
+<div className="modal-overlay" onClick={onClose}>
+<div className="modal-content" style={{ maxWidth: 480, textAlign: 'center' }} onClick={(e) =>
+<button onClick={() =>
+<button onClick={onClose} className="btn-primary" style={{ fontSize: '0.875rem', padding: '10px 24px' }}>
+
+--- src/components/ContactSection.tsx ---
+<a key={item.id} href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener noreferrer' : undefined} className="con
+
+--- src/components/Footer.tsx ---
+<a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="footer-social-btn" aria-label="Instagram" >
+<a href={socialLinks.tiktok} target="_blank" rel="noopener noreferrer" className="footer-social-btn" aria-label="TikTok" >
+
+--- src/components/Header.tsx ---
+<a href="#" className="navbar-logo">
+<a href={link.href} onClick={(e) =>
+<button className="btn-lang" onClick={() =>
+<button className="btn-login" onClick={onOpenMyBookings}>
+<button className="btn-primary" onClick={onBookNowClick} id="header-book-now-btn">
+
+--- src/components/HeroSection.tsx ---
+<button className="btn-hero-primary" onClick={onBookSessionClick} id="hero-book-session-btn" >
+<a href="#services-section" className="btn-hero-secondary" onClick={(e) =>
+
+--- src/components/MarketingFooter.tsx ---
+<Link href="/" className="flex items-center gap-2 text-white no-underline group mb-2">
+<a href="#" className="hover:text-white transition-colors">
+<a href="#" className="hover:text-white transition-colors">
+<a href="#" className="hover:text-white transition-colors">
+<a href="#" className="hover:text-white transition-colors">
+<a href="#" className="hover:text-white transition-colors">
+<a href="#" className="hover:text-white transition-colors">
+<a href="#" className="hover:text-white transition-colors">
+
+--- src/components/MarketingHeader.tsx ---
+<Link href="/" className="flex items-center gap-2 text-white no-underline group">
+<Link key={link.href} href={link.href} className={`text-sm font-medium transition-colors hover:text-violet-400 ${active ? 'text-violet-400' : 'text-sl
+<button onClick={handleLangToggle} className="text-slate-300 hover:text-white p-2 rounded-full hover:bg-white/5 transition-colors hidden sm:block" tit
+<Link href="/login" className="hidden sm:flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors" >
+<Link href="/register" className="bg-white text-black hover:bg-violet-50 px-5 py-2.5 rounded-full text-sm font-bold flex items-center gap-2 transition
+<button className="md:hidden text-white p-2" onClick={() =>
+<Link key={link.href} href={link.href} className="text-slate-200 p-2 font-medium" onClick={() =>
+<Link href="/login" className="text-slate-200 p-2 font-medium flex items-center gap-2" onClick={() =>
+
+--- src/components/ScheduleView.tsx ---
+<= 0; return ( <button key={slot.id} disabled={isFull} onClick={() =>
+
+--- src/components/ServiceList.tsx ---
+<button key={cat.id} onClick={() =>
+<button onClick={() =>
+
+--- src/components/ServicesSection.tsx ---
+<button className="btn-book-now" onClick={onSelect} id={`book-service-${service.id}`}>
+<button className="btn-add-package" onClick={onSelect} aria-label="Select package">
+<button className="btn-book-now" onClick={onSelect} id={`book-package-${service.id}`}>
+<button className="btn-book-now" onClick={onSelect} id={`book-livery-${service.id}`}>
+<button className="show-more-btn" onClick={() =>
+
+--- src/components/ThemeToggle.tsx ---
+<button onClick={() =>
+
+--- src/components/admin/AdminSidebar.tsx ---
+<button className="md:hidden text-slate-400 hover:text-white" onClick={() =>
+<Link key={link.href} href={link.href} onClick={() =>
+<button onClick={() =>
+<button onClick={() =>
+<div className="fixed inset-0 bg-black/60 z-40 md:hidden" onClick={() =>
+<aside className={`fixed inset-y-0 start-0 z-50 w-72 bg-[#0B1320] flex flex-col transition-transform duration-300 ease-in-out md:translate-x-0 md:stat
+
+--- src/components/admin/AdminTopBar.tsx ---
+<input type="text" placeholder="Search platform..." className="pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-full text-sm w-64 focus:outl
+<button className="relative p-2 text-slate-400 hover:text-slate-600 transition-colors">
+
+--- src/components/admin/SideNavBar.tsx ---
+<button className="w-full py-3 px-4 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm flex items-center justify-center gap-2 hover:bg-
+<Link key={link.name} href={link.href} className={`flex items-center gap-3 px-4 py-3 rounded-lg mx-2 my-1 font-label-sm text-label-sm transition-trans
+<Link href="/admin/alerts" className="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 my-1 f
+<Link href="/admin/settings" className="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 my-1
+<Link href="/admin/support" className="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 my-1 
+<button onClick={() =>
+
+--- src/components/admin/TopNavBar.tsx ---
+<button className="text-on-surface-variant p-2">
+
+--- src/components/dashboard/BottomNavBar.tsx ---
+<Link key={link.name} href={link.href} className="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-ful
+<Link key={link.name} href={link.href} className={`flex flex-col items-center justify-center transition-colors active:scale-90 transition-transform w-
+
+--- src/components/dashboard/SideNavBar.tsx ---
+<Link key={link.name} href={link.href} className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors active:translate-x-1 transition-tran
+<button className="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg transition-colors w-full text-
+<button className="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg transition-colors w-full text-
+<button className="mt-4 border border-secondary text-secondary hover:bg-secondary/10 px-4 py-2 rounded-lg font-label-sm text-label-sm transition-color
+
+--- src/components/dashboard/Sidebar.tsx ---
+<button className="md:hidden text-slate-400 hover:text-slate-600" onClick={() =>
+<Link href={`/${session.user.centerSlug}`} target="_blank" className="text-sm font-bold text-slate-900 hover:text-violet-600 flex items-center justify
+<Link key={item.href} href={item.href} onClick={() =>
+<Button variant="outline" className="w-full justify-start text-slate-600 hover:text-red-600 hover:border-red-200 hover:bg-red-50" onClick={() =>
+<button onClick={() =>
+<div className="fixed inset-0 bg-slate-900/60 z-40 md:hidden" onClick={() =>
+<aside className={`fixed inset-y-0 start-0 z-50 w-72 bg-white border-e border-slate-200 flex flex-col transition-transform duration-300 ease-in-out md
+
+--- src/components/dashboard/TopBar.tsx ---
+<button className="relative p-2 text-slate-400 hover:text-slate-600 transition-colors">
+
+--- src/components/dashboard/TopNavBar.tsx ---
+<input className="bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant/70 w-full p-0 
+<button className="text-on-surface-variant hover:text-primary transition-colors">
+<button className="text-on-surface-variant hover:text-primary transition-colors relative">
+<button className="w-10 h-10 rounded-full bg-tertiary-fixed overflow-hidden border border-outline-variant/30 hover:ring-2 hover:ring-primary/20 transi
+
+--- src/components/hub/BottomNavBar.tsx ---
+<Link key={link.name} href={link.href} className={`flex flex-col items-center justify-center transition-colors active:scale-95 ${ isActive ? 'bg-secon
+
+--- src/components/hub/SideNavBar.tsx ---
+<Link href="/hub/catalog" className="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg hover:bg-sur
+<Link href="/hub/horses" className="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg hover:bg-surf
+<Link href="/hub/trainers" className="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg hover:bg-su
+<Link href="/hub" className="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 hover:bg-surface-container-hi
+<Link href="/hub/revenue" className="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg hover:bg-sur
+<Link href="/hub/settings" className="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg hover:bg-su
+<button className="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg hover:bg-surface-container-hig
+<button className="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg hover:bg-surface-container-hig
+<button className="mt-2 w-full py-2 border border-secondary text-secondary rounded-lg font-label-sm text-label-sm hover:bg-secondary/10 transition-col
+
+--- src/components/hub/TopNavBar.tsx ---
+<Link href="/hub" className="font-display-lg text-display-lg text-primary tracking-tight">
+<Link href="/hub/catalog" className={`font-title-md text-title-md transition-colors duration-200 ${pathname.includes('catalog') ? 'text-primary font-b
+<Link href="/hub" className={`font-title-md text-title-md transition-colors duration-200 ${pathname === '/hub' || pathname.includes('bookings') ? 'tex
+<Link href="/hub/stable" className={`font-title-md text-title-md transition-colors duration-200 ${pathname.includes('stable') ? 'text-primary font-bol
+<button className="text-primary hover:text-secondary transition-colors duration-200 scale-95 active:scale-90 transition-transform">
+<button className="text-on-surface-variant hover:text-secondary transition-colors duration-200 scale-95 active:scale-90 transition-transform">
+<button onClick={() =>
+<Link href="/login" className="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label-sm text-label-sm hover:bg-surface-tint
+
+--- src/components/ui/Button.tsx ---
+<button className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`} disabled={disabled || isLoading} {...props} >
+
+--- src/components/ui/EmptyState.tsx ---
+<Button onClick={onAction}>

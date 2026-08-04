@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/hooks/useLanguage';
 import { MarketingHeader, Language } from '@/components/MarketingHeader';
 import { MarketingFooter } from '@/components/MarketingFooter';
 import { 
@@ -34,7 +35,7 @@ function useFadeInOnScroll() {
 }
 
 export default function MarketingHomePage() {
-  const [lang, setLang] = useState<Language>('ar');
+  const [lang, handleLangChange] = useLanguage('ar');
   const isAr = lang === 'ar';
   const ArrowIcon = isAr ? ArrowLeft : ArrowRight;
 
@@ -51,7 +52,7 @@ export default function MarketingHomePage() {
 
   return (
     <div className={`min-h-screen bg-[#040405] text-slate-100 selection:bg-violet-500/30 ${isAr ? 'font-cairo' : 'font-sans'}`} dir={isAr ? 'rtl' : 'ltr'}>
-      <MarketingHeader lang={lang} onLanguageChange={setLang} />
+      <MarketingHeader lang={lang} onLanguageChange={handleLangChange} />
 
       <main>
         {/* Section 2: Hero Section */}
@@ -85,7 +86,7 @@ export default function MarketingHomePage() {
             </div>
 
             {/* Dashboard Mockup */}
-            <div className="relative mx-auto w-full max-w-lg lg:max-w-none perspective-[1000px] fade-in-section opacity-0 translate-y-4 transition-all duration-700 delay-300">
+            <div id="demo" className="relative mx-auto w-full max-w-lg lg:max-w-none perspective-[1000px] fade-in-section opacity-0 translate-y-4 transition-all duration-700 delay-300">
               <div className="absolute inset-0 bg-gradient-to-tr from-violet-500/20 to-indigo-500/20 rounded-3xl blur-2xl transform rotate-3 scale-105" />
               <div className="relative bg-[#0b1120] border border-white/10 rounded-3xl p-6 shadow-2xl transform lg:rotate-[-2deg] lg:hover:rotate-0 transition-transform duration-700 group backdrop-blur-xl">
                 <div className="flex items-center justify-between mb-6 border-b border-white/5 pb-4">

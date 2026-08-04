@@ -6,43 +6,40 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   const session = await getAuth();
   if (!session?.user?.centerId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-  const existing = await db.service.findUnique({ where: { id: params.id } });
+  const existing = await db.trainer.findUnique({ where: { id: params.id } });
   if (!existing || existing.center_id !== session.user.centerId) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
   }
 
   const body = await req.json();
-  const { name_en, name_ar, price, original_price, discount_percent, session_count, duration_minutes, category, description_en, description_ar, target_service_id } = body;
+  const { name_en, name_ar, bio_en, bio_ar, specialty_en, specialty_ar, image_url } = body;
 
-  const service = await db.service.update({
+  const trainer = await db.trainer.update({
     where: { id: params.id },
     data: {
-      name_en, name_ar,
-      price: parseFloat(price),
-      original_price: original_price ? parseFloat(original_price) : null,
-      discount_percent: discount_percent ? parseFloat(discount_percent) : null,
-      session_count: session_count ? parseInt(session_count) : null,
-      duration_minutes: parseInt(duration_minutes),
-      category,
-      description_en: description_en || null,
-      description_ar: description_ar || null,
-      target_service_id: category === 'package' ? target_service_id : null,
+      name_en,
+      name_ar,
+      bio_en,
+      bio_ar,
+      specialty_en: specialty_en || null,
+      specialty_ar: specialty_ar || null,
+      image_url: image_url || null,
     },
   });
 
-  return NextResponse.json({ service });
+  return NextResponse.json({ trainer });
 }
 
 export async function DELETE(_req: NextRequest, { params }: { params: { id: string } }) {
   const session = await getAuth();
   if (!session?.user?.centerId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-  const existing = await db.service.findUnique({ where: { id: params.id } });
+  const existing = await db.trainer.findUnique({ where: { id: params.id } });
   if (!existing || existing.center_id !== session.user.centerId) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
   }
 
-  await db.service.update({
+  await db.trainer.update({
     where: { id: params.id },
     data: { is_active: false }
   });

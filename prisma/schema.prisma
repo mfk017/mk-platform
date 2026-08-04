@@ -69,9 +69,13 @@ model Service {
   description_en   String?
   description_ar   String?
   image_url        String?
+  is_active        Boolean        @default(true)
+  target_service_id String?
   created_at       DateTime       @default(now())
 
   center           Center         @relation(fields: [center_id], references: [id], onDelete: Cascade)
+  target_service   Service?       @relation("PackageTarget", fields: [target_service_id], references: [id])
+  packages         Service[]      @relation("PackageTarget")
   schedule_slots   ScheduleSlot[]
   bookings         Booking[]
 
@@ -87,9 +91,11 @@ model Horse {
   breed_ar   String
   age        Int
   image_url  String?
+  is_active  Boolean  @default(true)
   created_at DateTime @default(now())
 
   center     Center   @relation(fields: [center_id], references: [id], onDelete: Cascade)
+  bookings   Booking[]
 
   @@map("horses")
 }
@@ -104,9 +110,11 @@ model Trainer {
   specialty_en String?
   specialty_ar String?
   image_url    String?
+  is_active    Boolean  @default(true)
   created_at   DateTime @default(now())
 
   center       Center   @relation(fields: [center_id], references: [id], onDelete: Cascade)
+  bookings     Booking[]
 
   @@map("trainers")
 }
@@ -145,12 +153,16 @@ model Booking {
   payment_status       String       @default("pending")
   moyasar_payment_id   String?      @unique
   payout_id            String?
+  horse_id             String?
+  trainer_id           String?
   status               String       @default("confirmed")
   created_at           DateTime     @default(now())
 
   center               Center       @relation(fields: [center_id], references: [id], onDelete: Cascade)
   service              Service      @relation(fields: [service_id], references: [id], onDelete: Cascade)
   slot                 ScheduleSlot @relation(fields: [slot_id], references: [id], onDelete: Cascade)
+  horse                Horse?       @relation(fields: [horse_id], references: [id], onDelete: SetNull)
+  trainer              Trainer?     @relation(fields: [trainer_id], references: [id], onDelete: SetNull)
   payout               Payout?      @relation(fields: [payout_id], references: [id], onDelete: SetNull)
 
   @@map("bookings")

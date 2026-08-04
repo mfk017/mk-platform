@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 
 export default function TopNavBar() {
   return (
@@ -20,22 +21,22 @@ export default function TopNavBar() {
           />
         </div>
 
-        <button className="text-on-surface-variant hover:text-primary transition-colors">
+        <button disabled className="text-on-surface-variant opacity-50 cursor-not-allowed" title="Coming soon">
           <span className="material-symbols-outlined">language</span>
         </button>
 
-        <button className="text-on-surface-variant hover:text-primary transition-colors relative">
+        <button disabled className="text-on-surface-variant relative opacity-50 cursor-not-allowed" title="Coming soon">
           <span className="material-symbols-outlined">notifications</span>
           <span className="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
         </button>
 
-        <button className="w-10 h-10 rounded-full bg-tertiary-fixed overflow-hidden border border-outline-variant/30 hover:ring-2 hover:ring-primary/20 transition-all">
+        <Link href="/dashboard/settings" className="w-10 h-10 rounded-full bg-tertiary-fixed overflow-hidden border border-outline-variant/30 hover:ring-2 hover:ring-primary/20 transition-all block">
           <img
             alt="User Avatar"
             className="w-full h-full object-cover"
             src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80"
           />
-        </button>
+        </Link>
       </div>
     </header>
   );

@@ -2,12 +2,13 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/hooks/useLanguage';
 import { MarketingHeader, Language } from '@/components/MarketingHeader';
 import { MarketingFooter } from '@/components/MarketingFooter';
 import { CheckCircle2, XCircle } from 'lucide-react';
 
 export default function PricingPage() {
-  const [lang, setLang] = useState<Language>('ar');
+  const [lang, setLang] = useLanguage('ar');
   const isAr = lang === 'ar';
 
   return (

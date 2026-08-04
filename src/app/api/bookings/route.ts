@@ -13,6 +13,8 @@ export async function POST(request: Request) {
       customer_email,
       booking_price,
       payment_method = 'mada',
+      horse_id,
+      trainer_id,
     } = body;
 
     if (!center_id || !service_id || !slot_id || !customer_name || !customer_phone) {
@@ -33,6 +35,30 @@ export async function POST(request: Request) {
 
     if (slot.booked_count >= slot.capacity) {
       return NextResponse.json({ error: 'This slot is already fully booked' }, { status: 400 });
+    }
+
+    // Conflict Check for Horse and Trainer
+    if (horse_id || trainer_id) {
+      const orConditions = [];
+      if (horse_id) orConditions.push({ horse_id });
+      if (trainer_id) orConditions.push({ trainer_id });
+
+      const conflict = await db.booking.findFirst({
+        where: {
+          status: { in: ['confirmed', 'completed'] },
+          slot: {
+            AND: [
+              { start_time: { lt: slot.end_time } },
+              { end_time: { gt: slot.start_time } },
+            ]
+          },
+          OR: orConditions,
+        }
+      });
+
+      if (conflict) {
+        return NextResponse.json({ error: 'This horse or instructor is already booked during this time.' }, { status: 409 });
+      }
     }
 
     // Generate unique reference code: CNTR-2026-XXXX
@@ -61,6 +87,8 @@ export async function POST(request: Request) {
           center_id,
           service_id,
           slot_id,
+          horse_id: horse_id || null,
+          trainer_id: trainer_id || null,
           reference_code: referenceCode,
           customer_name,
           customer_phone,

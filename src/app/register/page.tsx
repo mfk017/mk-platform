@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useLanguage } from '@/hooks/useLanguage';
 import { MarketingHeader, Language } from '@/components/MarketingHeader';
 import { MarketingFooter } from '@/components/MarketingFooter';
 import { CheckCircle2, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
 export default function RegisterPage() {
-  const [lang, setLang] = useState<Language>('ar');
+  const [lang, setLang] = useLanguage('ar');
   const isAr = lang === 'ar';
   
   const [loading, setLoading] = useState(false);

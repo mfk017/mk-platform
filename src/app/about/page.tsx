@@ -1,11 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useLanguage } from '@/hooks/useLanguage';
 import { MarketingHeader, Language } from '@/components/MarketingHeader';
 import { MarketingFooter } from '@/components/MarketingFooter';
 
 export default function AboutPage() {
-  const [lang, setLang] = useState<Language>('ar');
+  const [lang, setLang] = useLanguage('ar');
   const isAr = lang === 'ar';
 
   return (

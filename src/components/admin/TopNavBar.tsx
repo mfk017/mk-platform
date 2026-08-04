@@ -11,7 +11,7 @@ export default function TopNavBar() {
         </div>
         <h1 className="font-title-md text-title-md text-primary">Canter OS</h1>
       </div>
-      <button className="text-on-surface-variant p-2">
+      <button disabled className="text-on-surface-variant p-2 opacity-50 cursor-not-allowed" title="Mobile menu coming soon">
         <span className="material-symbols-outlined">menu</span>
       </button>
     </header>

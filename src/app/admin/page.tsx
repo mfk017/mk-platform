@@ -13,15 +13,15 @@ export default function SuperAdminPage() {
           <p className="font-body-md text-on-surface-variant mt-1">Manage revenue, platform commissions, and payouts.</p>
         </div>
         <div className="flex gap-3 w-full md:w-auto">
-          <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-outline-variant rounded-lg hover:bg-surface-container-high transition-colors text-on-surface font-label-sm">
-            <span className="material-symbols-outlined text-[18px]">download</span> Export CSV
+          <button disabled className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-outline-variant rounded-lg bg-surface-container-low text-on-surface-variant font-label-sm cursor-not-allowed opacity-70">
+            <span className="material-symbols-outlined text-[18px]">download</span> Export CSV (Soon)
           </button>
           <div className="relative w-full md:w-auto hidden md:block">
             <select className="appearance-none w-full bg-surface border border-outline-variant text-on-surface py-2 pl-4 pr-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-label-sm">
-              <option>This Month (Oct 2023)</option>
-              <option>Last Month</option>
-              <option>Q3 2023</option>
-              <option>Year to Date</option>
+              <option value="this-month">This Month (Oct 2023)</option>
+              <option value="last-month">Last Month</option>
+              <option value="q3">Q3 2023</option>
+              <option value="ytd">Year to Date</option>
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-on-surface-variant">
               <span className="material-symbols-outlined text-[18px]">arrow_drop_down</span>
@@ -116,7 +116,7 @@ export default function SuperAdminPage() {
               <tbody className="font-body-md text-on-surface">
                 {/* Row 1 */}
                 <tr className="border-b border-surface-variant hover:bg-surface-container-lowest transition-colors group">
-                  <td className="p-4"><span className="font-label-sm text-primary group-hover:underline cursor-pointer">#BK-9921</span></td>
+                  <td className="p-4"><Link href="/admin/bookings" className="font-label-sm text-primary group-hover:underline cursor-pointer">#BK-9921</Link></td>
                   <td className="p-4 text-on-surface-variant text-sm">Oct 24, 10:00 AM</td>
                   <td className="p-4 text-right font-mono text-sm">SAR 450.00</td>
                   <td className="p-4 text-right font-mono text-sm text-error/80">-SAR 36.00</td>
@@ -127,7 +127,7 @@ export default function SuperAdminPage() {
                 </tr>
                 {/* Row 2 */}
                 <tr className="border-b border-surface-variant hover:bg-surface-container-lowest transition-colors group">
-                  <td className="p-4"><span className="font-label-sm text-primary group-hover:underline cursor-pointer">#BK-9920</span></td>
+                  <td className="p-4"><Link href="/admin/bookings" className="font-label-sm text-primary group-hover:underline cursor-pointer">#BK-9920</Link></td>
                   <td className="p-4 text-on-surface-variant text-sm">Oct 24, 09:00 AM</td>
                   <td className="p-4 text-right font-mono text-sm">SAR 300.00</td>
                   <td className="p-4 text-right font-mono text-sm text-error/80">-SAR 24.00</td>
@@ -138,7 +138,7 @@ export default function SuperAdminPage() {
                 </tr>
                 {/* Row 3 */}
                 <tr className="border-b border-surface-variant hover:bg-surface-container-lowest transition-colors group">
-                  <td className="p-4"><span className="font-label-sm text-primary group-hover:underline cursor-pointer">#BK-9919</span></td>
+                  <td className="p-4"><Link href="/admin/bookings" className="font-label-sm text-primary group-hover:underline cursor-pointer">#BK-9919</Link></td>
                   <td className="p-4 text-on-surface-variant text-sm">Oct 23, 04:00 PM</td>
                   <td className="p-4 text-right font-mono text-sm">SAR 800.00</td>
                   <td className="p-4 text-right font-mono text-sm text-error/80">-SAR 64.00</td>
@@ -149,7 +149,7 @@ export default function SuperAdminPage() {
                 </tr>
                 {/* Row 4 */}
                 <tr className="border-b border-surface-variant hover:bg-surface-container-lowest transition-colors group">
-                  <td className="p-4"><span className="font-label-sm text-primary group-hover:underline cursor-pointer">#BK-9918</span></td>
+                  <td className="p-4"><Link href="/admin/bookings" className="font-label-sm text-primary group-hover:underline cursor-pointer">#BK-9918</Link></td>
                   <td className="p-4 text-on-surface-variant text-sm">Oct 23, 02:30 PM</td>
                   <td className="p-4 text-right font-mono text-sm">SAR 450.00</td>
                   <td className="p-4 text-right font-mono text-sm text-error/80">-SAR 36.00</td>
@@ -162,7 +162,7 @@ export default function SuperAdminPage() {
             </table>
           </div>
           <div className="p-4 border-t border-outline-variant/20 bg-surface-container-lowest text-center">
-            <button className="text-label-sm font-label-sm text-primary hover:underline">View All Centers</button>
+            <Link href="/admin/centers" className="text-label-sm font-label-sm text-primary hover:underline">View All Centers</Link>
           </div>
         </div>
 
@@ -189,9 +189,9 @@ export default function SuperAdminPage() {
                 <span className="font-mono text-sm text-on-surface-variant">SAR 4,100.00</span>
               </div>
             </div>
-            <button className="w-full bg-primary-container text-on-primary-container font-label-sm py-3 rounded-lg hover:bg-primary-container/90 transition-colors flex justify-center items-center gap-2">
+            <button disabled className="w-full bg-surface-container-highest text-on-surface-variant font-label-sm py-3 rounded-lg cursor-not-allowed flex justify-center items-center gap-2 opacity-70">
               <span className="material-symbols-outlined text-[18px]">account_balance</span>
-              Request Early Payout
+              Early Payout (Soon)
             </button>
           </div>
 
@@ -210,7 +210,7 @@ export default function SuperAdminPage() {
                 <div>
                   <p className="font-label-sm text-label-sm text-on-surface font-semibold">Payout Failed</p>
                   <p className="font-label-xs text-label-xs text-on-surface-variant mt-0.5">Al-Khayal Stables payout (SAR 12k) bounced due to invalid IBAN.</p>
-                  <button className="mt-2 text-xs font-medium text-error hover:underline">Resolve Now</button>
+                  <button disabled className="mt-2 text-xs font-medium text-on-surface-variant opacity-70 cursor-not-allowed">Coming Soon</button>
                 </div>
               </div>
               <div className="p-3 border border-secondary/20 bg-secondary-container/20 rounded-lg flex gap-3 items-start">
@@ -218,7 +218,7 @@ export default function SuperAdminPage() {
                 <div>
                   <p className="font-label-sm text-label-sm text-on-surface font-semibold">Verification Pending</p>
                   <p className="font-label-xs text-label-xs text-on-surface-variant mt-0.5">Oasis Horsemanship uploaded commercial registration. Needs manual review.</p>
-                  <button className="mt-2 text-xs font-medium text-secondary hover:underline">Review Docs</button>
+                  <button disabled className="mt-2 text-xs font-medium text-on-surface-variant opacity-70 cursor-not-allowed">Coming Soon</button>
                 </div>
               </div>
             </div>

@@ -29,10 +29,10 @@ export default function SideNavBar() {
 
       {/* CTA */}
       <div className="px-4 mb-6">
-        <button className="w-full py-3 px-4 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors shadow-sm">
+        <Link href="/register" target="_blank" className="w-full py-3 px-4 bg-primary text-on-primary rounded-lg font-label-sm text-label-sm flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors shadow-sm">
           <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>add</span>
           Onboard Center
-        </button>
+        </Link>
       </div>
 
       {/* Main Nav */}
@@ -57,16 +57,13 @@ export default function SideNavBar() {
           );
         })}
 
-        <Link
-          href="/admin/alerts"
-          className="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 my-1 font-label-sm text-label-sm transition-transform duration-200 hover:translate-x-1 active:scale-[0.98] justify-between"
-        >
+        <div className="flex items-center gap-3 px-4 py-3 text-on-surface-variant rounded-lg mx-2 my-1 font-label-sm text-label-sm justify-between opacity-50 cursor-not-allowed">
           <div className="flex items-center gap-3">
             <span className="material-symbols-outlined">notifications</span>
-            Alerts
+            Alerts (Soon)
           </div>
-          <span className="bg-error text-on-error px-2 py-0.5 rounded-full font-label-xs text-[10px]">3</span>
-        </Link>
+          <span className="bg-error text-on-error px-2 py-0.5 rounded-full font-label-xs text-[10px]">0</span>
+        </div>
       </div>
 
       {/* Footer Nav */}
@@ -78,13 +75,10 @@ export default function SideNavBar() {
           <span className="material-symbols-outlined">settings</span>
           Settings
         </Link>
-        <Link
-          href="/admin/support"
-          className="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 my-1 font-label-sm text-label-sm transition-transform duration-200 hover:translate-x-1 active:scale-[0.98]"
-        >
+        <div className="flex items-center gap-3 px-4 py-3 text-on-surface-variant rounded-lg mx-2 my-1 font-label-sm text-label-sm opacity-50 cursor-not-allowed">
           <span className="material-symbols-outlined">help</span>
-          Support
-        </Link>
+          Support (Soon)
+        </div>
         
         {/* User Profile Mini */}
         <div className="mt-4 px-4 flex items-center justify-between">
