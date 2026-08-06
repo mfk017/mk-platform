@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(
   request: Request,
   { params }: { params: { slug: string } }
@@ -11,9 +13,10 @@ export async function GET(
     const center = await db.center.findUnique({
       where: { slug, status: 'active' },
       include: {
-        services: true,
-        horses: true,
-        trainers: true,
+        services: { where: { is_active: true } },
+        horses: { where: { is_active: true } },
+        trainers: { where: { is_active: true } },
+
         schedule_slots: {
           orderBy: { start_time: 'asc' },
         },

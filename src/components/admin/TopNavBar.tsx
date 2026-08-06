@@ -9,7 +9,7 @@ export default function TopNavBar() {
         <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
           <span className="material-symbols-outlined text-primary text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>shield_person</span>
         </div>
-        <h1 className="font-title-md text-title-md text-primary">Canter OS</h1>
+        <h1 className="font-title-md text-title-md text-primary">Admin Panel</h1>
       </div>
       <button disabled className="text-on-surface-variant p-2 opacity-50 cursor-not-allowed" title="Mobile menu coming soon">
         <span className="material-symbols-outlined">menu</span>

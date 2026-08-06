@@ -15,22 +15,66 @@ export async function POST(request: Request) {
       payment_method = 'mada',
       horse_id,
       trainer_id,
+      livery_month,
     } = body;
 
-    if (!center_id || !service_id || !slot_id || !customer_name || !customer_phone) {
+    let { start_time, end_time } = body;
+
+    if (livery_month && !start_time) {
+      start_time = new Date(livery_month + '-01T00:00:00Z').toISOString();
+      end_time = new Date(livery_month + '-28T00:00:00Z').toISOString();
+    }
+
+    if (!center_id || !service_id || !customer_name || !customer_phone) {
       return NextResponse.json(
         { error: 'Missing required booking fields' },
         { status: 400 }
       );
     }
 
-    // Verify slot capacity
-    const slot = await db.scheduleSlot.findUnique({
-      where: { id: slot_id },
-    });
+    if (!slot_id && (!start_time || !end_time)) {
+      return NextResponse.json(
+        { error: 'Either slot_id or start_time/end_time must be provided' },
+        { status: 400 }
+      );
+    }
+
+    // JIT Slot generation or fetching
+    let slot = null;
+    let actualSlotId = slot_id;
+
+    if (slot_id) {
+      slot = await db.scheduleSlot.findUnique({
+        where: { id: slot_id },
+      });
+    } else {
+      // Find by start time and service id
+      slot = await db.scheduleSlot.findFirst({
+        where: {
+          center_id,
+          service_id,
+          start_time: new Date(start_time),
+        }
+      });
+      
+      if (!slot) {
+        // Create it on the fly!
+        slot = await db.scheduleSlot.create({
+          data: {
+            center_id,
+            service_id,
+            start_time: new Date(start_time),
+            end_time: new Date(end_time),
+            capacity: 10, // Default capacity
+            booked_count: 0,
+          }
+        });
+      }
+      actualSlotId = slot.id;
+    }
 
     if (!slot) {
-      return NextResponse.json({ error: 'Selected time slot not found' }, { status: 404 });
+      return NextResponse.json({ error: 'Selected time slot could not be resolved' }, { status: 404 });
     }
 
     if (slot.booked_count >= slot.capacity) {
@@ -77,7 +121,12 @@ export async function POST(request: Request) {
     // platform_fee = center.commission_rate (locked in at registration)
     // net_amount_to_center = gross - gateway - platform_fee
     const platformFee = center.commission_rate;
-    const gatewayFee = payment_method === 'mada' ? booking_price * 0.01 + 1.0 : booking_price * 0.0275 + 1.0;
+    let gatewayFee = 0;
+    if (payment_method === 'mada') {
+      gatewayFee = booking_price * 0.01 + 1.0;
+    } else if (payment_method !== 'cash') {
+      gatewayFee = booking_price * 0.0275 + 1.0;
+    }
     const netToCenter = booking_price - gatewayFee - platformFee;
 
     // Transaction: Create booking & increment slot booked_count
@@ -86,7 +135,7 @@ export async function POST(request: Request) {
         data: {
           center_id,
           service_id,
-          slot_id,
+          slot_id: actualSlotId,
           horse_id: horse_id || null,
           trainer_id: trainer_id || null,
           reference_code: referenceCode,
@@ -103,7 +152,7 @@ export async function POST(request: Request) {
         },
       }),
       db.scheduleSlot.update({
-        where: { id: slot_id },
+        where: { id: actualSlotId },
         data: {
           booked_count: { increment: 1 },
         },

@@ -59,7 +59,7 @@ export default function LoginPage() {
             <Zap size={24} color="white" />
           </div>
           <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--dash-text)', marginBottom: 4 }}>
-            Canter Dashboard
+            لوحة التحكم | Dashboard
           </h1>
           <p style={{ fontSize: '0.875rem', color: 'var(--dash-muted)' }}>
             Sign in to manage your equestrian center
@@ -145,8 +145,8 @@ export default function LoginPage() {
               style={{
                 width: '100%', padding: '12px', borderRadius: 10,
                 background: loading ? 'var(--primary-hover)' : 'var(--primary)',
-                color: 'white', border: 'none', fontSize: '0.95rem',
-                fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer',
+                color: '#1e293b', border: 'none', fontSize: '0.95rem',
+                fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer',
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                 transition: 'background 0.15s',
               }}
@@ -156,10 +156,6 @@ export default function LoginPage() {
             </button>
           </form>
         </div>
-
-        <p style={{ textAlign: 'center', marginTop: 20, fontSize: '0.8rem', color: 'var(--dash-muted)' }}>
-          Demo: <strong>admin@al-khalediah.sa</strong> / <strong>password123</strong>
-        </p>
       </div>
     </div>
   );

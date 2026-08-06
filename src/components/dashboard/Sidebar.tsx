@@ -50,17 +50,24 @@ export function Sidebar() {
 
       {/* Center Badge */}
       {session?.user?.centerSlug && (
-        <div className="px-5 py-4 border-b border-slate-200 bg-slate-50/50">
-          <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">
-            Your Center
+        <div className="px-5 py-4 border-b border-slate-200 bg-slate-50/50 flex flex-col gap-3">
+          <div>
+            <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">
+              Your Center
+            </div>
+            <Link
+              href={`/${session.user.centerSlug}`}
+              target="_blank"
+              className="text-sm font-bold text-slate-900 hover:text-violet-600 flex items-center justify-between group transition-colors"
+            >
+              <span>/{session.user.centerSlug}</span>
+              <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-violet-600 transition-colors" />
+            </Link>
           </div>
-          <Link
-            href={`/${session.user.centerSlug}`}
-            target="_blank"
-            className="text-sm font-bold text-slate-900 hover:text-violet-600 flex items-center justify-between group transition-colors"
-          >
-            <span>/{session.user.centerSlug}</span>
-            <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-violet-600 transition-colors" />
+          <Link href={`/${session.user.centerSlug}`} target="_blank" className="w-full">
+            <Button variant="outline" className="w-full text-xs" size="sm">
+              View Public Site
+            </Button>
           </Link>
         </div>
       )}

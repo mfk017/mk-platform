@@ -8,7 +8,7 @@ import { HeroSection } from '@/components/HeroSection';
 import { ServicesSection } from '@/components/ServicesSection';
 import { HorsesSection } from '@/components/HorsesSection';
 import { TrainersSection } from '@/components/TrainersSection';
-import { ContactSection } from '@/components/ContactSection';
+
 import { Footer } from '@/components/Footer';
 import { ScheduleView, SlotData, ServiceData } from '@/components/ScheduleView';
 import { BookingModal } from '@/components/BookingModal';
@@ -18,7 +18,7 @@ export default function PublicCenterPage() {
   const params = useParams();
   const slug = params?.slug as string;
 
-  const [lang, setLang] = useState<Language>('en');
+  const [lang, setLang] = useState<Language>('ar');
   const [centerData, setCenterData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -159,7 +159,6 @@ export default function PublicCenterPage() {
 
         <HorsesSection horses={centerData.horses || []} lang={lang} />
         <TrainersSection trainers={centerData.trainers || []} lang={lang} />
-        <ContactSection center={centerData} lang={lang} />
       </div>
 
       <Footer centerName={centerName} lang={lang} center={centerData} />

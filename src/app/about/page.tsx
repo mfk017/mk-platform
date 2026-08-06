@@ -16,7 +16,7 @@ export default function AboutPage() {
       <main className="pt-32 pb-24 max-w-3xl mx-auto px-4 md:px-8">
         <div className="space-y-12">
           <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight text-center">
-            {isAr ? 'عن منصة كانتر' : 'About Canter Platform'}
+            {isAr ? 'عن المنصة' : 'About Platform'}
           </h1>
           
           <div className="space-y-6 text-lg text-slate-300 leading-relaxed">
@@ -27,8 +27,8 @@ export default function AboutPage() {
             </p>
             <p>
               {isAr 
-                ? 'تم بناء "كانتر" ليكون الحل الشامل الذي يربط بين المراكز والفرسان، مع توفير لوحات تحكم متقدمة، بوابات دفع آمنة، ونظام حجز لا مثيل له في بساطته وفعاليته.'
-                : 'Canter was built as the comprehensive solution bridging centers and riders, providing advanced dashboards, secure payment gateways, and a booking system unmatched in its simplicity and effectiveness.'}
+                ? 'تم بناء المنصة لتكون الحل الشامل الذي يربط بين المراكز والفرسان، مع توفير لوحات تحكم متقدمة، بوابات دفع آمنة، ونظام حجز لا مثيل له في بساطته وفعاليته.'
+                : 'Our platform was built as the comprehensive solution bridging centers and riders, providing advanced dashboards, secure payment gateways, and a booking system unmatched in its simplicity and effectiveness.'}
             </p>
           </div>
 
@@ -37,11 +37,8 @@ export default function AboutPage() {
               {isAr ? 'تواصل معنا' : 'Contact Us'}
             </h2>
             <div className="flex flex-col gap-4 text-slate-300">
-              <a href="mailto:support@canter.sa" className="hover:text-violet-400 transition-colors">
-                support@canter.sa
-              </a>
-              <a href="https://wa.me/966500000000" className="hover:text-emerald-400 transition-colors" target="_blank" rel="noreferrer">
-                {isAr ? 'واتساب: 966500000000+' : 'WhatsApp: +966 50 000 0000'}
+              <a href="https://wa.me/966549485894" className="hover:text-emerald-400 transition-colors" target="_blank" rel="noreferrer">
+                {isAr ? 'واتساب: 966549485894+' : 'WhatsApp: +966 54 948 5894'}
               </a>
             </div>
           </div>

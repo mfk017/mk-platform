@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
   if (!session?.user?.centerId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const body = await req.json();
-  const { name_en, name_ar, bio_en, bio_ar, specialty_en, specialty_ar, image_url } = body;
+  const { name_en, name_ar, bio_en, bio_ar, specialty_en, specialty_ar, image_url, is_active } = body;
 
   if (!name_en || !name_ar || !bio_en || !bio_ar) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -35,6 +35,7 @@ export async function POST(req: NextRequest) {
       specialty_en: specialty_en || null,
       specialty_ar: specialty_ar || null,
       image_url: image_url || null,
+      is_active: is_active ?? true,
     },
   });
 

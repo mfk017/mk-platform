@@ -1,30 +1,54 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 export default function DashboardOverview() {
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch('/api/dashboard/overview');
+        if (res.ok) {
+          const json = await res.json();
+          setData(json);
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <p className="text-on-surface-variant font-medium">Loading Dashboard...</p>
+      </div>
+    );
+  }
+
+  const { stats = {}, todaySchedule = [], horses = {} } = data || {};
+  
   return (
     <>
       {/* Header */}
-      <header className="flex justify-between items-end mb-8">
+      <header className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
         <div>
-          <p className="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">
-            Today's Overview | نظرة عامة اليوم
+          <h2 className="font-display-lg text-title-md text-on-surface m-0 p-0">الرئيسية | Overview</h2>
+          <p className="font-ibm-plex-sans text-label-sm text-on-surface-variant hidden sm:block">
+            نظرة عامة على أداء المركز | Dashboard overview and quick actions
           </p>
-          <h1 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
-            Good Morning, Manager
-          </h1>
         </div>
-        <div className="hidden md:flex gap-4">
-          <button disabled className="bg-surface border border-outline-variant text-primary font-label-sm text-label-sm px-4 py-2 rounded-lg opacity-50 cursor-not-allowed shadow-sm flex items-center gap-2" title="Coming soon">
-            <span className="material-symbols-outlined text-[18px]">calendar_month</span>
-            Date Range
-          </button>
-          <button disabled className="bg-[#1B4332] text-white font-label-sm text-label-sm px-6 py-2 rounded-lg opacity-50 cursor-not-allowed shadow-xl shadow-primary/10 flex items-center gap-2" title="Coming soon">
+        <div className="flex gap-3 w-full md:w-auto">
+          <Link href="/dashboard/bookings/new" className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg hover:bg-primary/90 transition-colors font-label-sm shadow-sm">
             <span className="material-symbols-outlined text-[18px]">add</span>
-            New Booking
-          </button>
+            حجز جديد | New Booking
+          </Link>
         </div>
       </header>
 
@@ -44,26 +68,26 @@ export default function DashboardOverview() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Revenue */}
             <div className="border-l-4 border-[#1B4332] pl-4">
-              <p className="font-label-sm text-label-sm text-on-surface-variant mb-1">Total Revenue</p>
-              <p className="font-display-lg text-display-lg text-primary">SAR 124.5K</p>
+              <p className="font-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">أرباح اليوم | Today's Revenue</p>
+              <h3 className="font-headline-lg-mobile text-primary font-bold">SAR {stats.todayRevenue?.toLocaleString() ?? 0}</h3>
               <p className="font-label-xs text-label-xs text-[#3f6653] mt-2 flex items-center gap-1">
                 <span className="material-symbols-outlined text-[14px]">trending_up</span>
-                +12% vs last month
+                Real data
               </p>
             </div>
             {/* Platform Fees */}
             <div className="border-l-4 border-secondary pl-4">
-              <p className="font-label-sm text-label-sm text-on-surface-variant mb-1">Platform Fees (5%)</p>
-              <p className="font-title-md text-title-md text-on-surface">SAR 6,225</p>
+              <p className="font-label-sm text-label-sm text-on-surface-variant mb-1">Platform Fees</p>
+              <p className="font-title-md text-title-md text-on-surface">SAR {stats.totalPlatformFees?.toLocaleString() ?? 0}</p>
               <p className="font-label-xs text-label-xs text-on-surface-variant mt-2">Deducted automatically</p>
             </div>
             {/* Active Bookings */}
             <div className="border-l-4 border-inverse-primary pl-4">
-              <p className="font-label-sm text-label-sm text-on-surface-variant mb-1">Active Bookings</p>
-              <p className="font-display-lg text-display-lg text-primary">342</p>
+              <p className="font-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">حجوزات اليوم | Today's Bookings</p>
+              <h3 className="font-headline-lg-mobile text-primary font-bold">{stats.todayBookings ?? 0}</h3>
               <p className="font-label-xs text-label-xs text-[#3f6653] mt-2 flex items-center gap-1">
                 <span className="material-symbols-outlined text-[14px]">check_circle</span>
-                98% Fulfillment
+                Confirmed
               </p>
             </div>
           </div>
@@ -74,7 +98,7 @@ export default function DashboardOverview() {
           <div className="flex justify-between items-center mb-6">
             <h2 className="font-title-md text-title-md text-primary flex items-center gap-2">
               <span className="material-symbols-outlined text-secondary">bedroom_baby</span>
-              Stable Status
+              حالة الخيل | Stable Status
             </h2>
             <Link href="/dashboard/horses" className="text-primary hover:text-secondary transition-colors">
               <span className="material-symbols-outlined">arrow_forward</span>
@@ -85,94 +109,87 @@ export default function DashboardOverview() {
               <div className="flex items-center gap-3">
                 <div className="w-2 h-8 rounded bg-[#3f6653]"></div>
                 <div>
-                  <p className="font-label-sm text-label-sm text-primary">In Training</p>
-                  <p className="font-label-xs text-label-xs text-on-surface-variant">Active sessions</p>
+                  <p className="font-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">إجمالي الخيل | Total Horses</p>
+                  <h3 className="font-headline-lg-mobile text-primary font-bold">{horses.total ?? 0}</h3>
                 </div>
               </div>
-              <span className="font-title-md text-title-md text-primary">24</span>
             </div>
             <div className="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-8 rounded bg-secondary"></div>
                 <div>
-                  <p className="font-label-sm text-label-sm text-primary">Medical Check</p>
-                  <p className="font-label-xs text-label-xs text-on-surface-variant">Pending vet</p>
+                  <p className="font-label-sm text-label-sm text-primary">نشط | Active</p>
+                  <p className="font-label-xs text-label-xs text-on-surface-variant">متاح للحجز | Available for booking</p>
                 </div>
               </div>
-              <span className="font-title-md text-title-md text-primary">3</span>
+              <span className="font-title-md text-title-md text-primary">{horses.active ?? 0}</span>
             </div>
             <div className="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-8 rounded bg-surface-variant"></div>
                 <div>
-                  <p className="font-label-sm text-label-sm text-primary">Resting</p>
-                  <p className="font-label-xs text-label-xs text-on-surface-variant">Stabled</p>
+                  <p className="font-label-sm text-label-sm text-primary">غير نشط | Inactive</p>
+                  <p className="font-label-xs text-label-xs text-on-surface-variant">راحة / طبي | Resting / Medical</p>
                 </div>
               </div>
-              <span className="font-title-md text-title-md text-primary">15</span>
+              <span className="font-title-md text-title-md text-primary">{(horses.total ?? 0) - (horses.active ?? 0)}</span>
             </div>
           </div>
         </div>
 
         {/* Today's Schedule - Span 8 on Desktop */}
         <div className="col-span-4 md:col-span-8 lg:col-span-8 bg-surface rounded-xl shadow-xl shadow-primary/5 border border-secondary/10 p-6 overflow-hidden flex flex-col">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="font-title-md text-title-md text-primary flex items-center gap-2">
-              <span className="material-symbols-outlined text-secondary">schedule</span>
-              Today's Schedule
-            </h2>
-            <Link className="font-label-sm text-label-sm text-primary hover:underline" href="/dashboard/bookings">
-              View All
-            </Link>
+          <div className="p-6 border-b border-outline-variant/30 flex justify-between items-center bg-surface-container-lowest rounded-t-xl">
+            <h3 className="font-title-md text-primary font-semibold">حجوزات قادمة | Upcoming Bookings</h3>
+            <Link href="/dashboard/bookings" className="font-label-sm text-primary hover:underline">عرض الكل | View All</Link>
           </div>
           <div className="flex-1 overflow-auto">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-secondary-fixed/30 border-b border-surface-variant">
-                  <th className="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant font-medium">Time</th>
-                  <th className="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant font-medium">Activity</th>
-                  <th className="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant font-medium">Trainer/Client</th>
-                  <th className="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant font-medium">Horse</th>
-                  <th className="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant font-medium">Status</th>
+                  <th className="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant font-medium">الوقت | Time</th>
+                  <th className="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant font-medium">الخدمة | Activity</th>
+                  <th className="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant font-medium">المدرب/العميل | Trainer/Client</th>
+                  <th className="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant font-medium">الخيل | Horse</th>
+                  <th className="py-3 px-4 font-label-sm text-label-sm text-on-surface-variant font-medium">الحالة | Status</th>
                 </tr>
               </thead>
               <tbody className="font-body-md text-body-md text-on-surface">
-                <tr className="border-b border-surface-variant hover:bg-surface-container-low transition-colors">
-                  <td className="py-3 px-4 font-label-sm text-label-sm">08:00 AM</td>
-                  <td className="py-3 px-4">Show Jumping</td>
-                  <td className="py-3 px-4">Ahmed R. / Sarah K.</td>
-                  <td className="py-3 px-4">Thunder</td>
-                  <td className="py-3 px-4">
-                    <span className="bg-[#e6f4ea] text-[#137333] px-2 py-1 rounded text-xs font-medium">Ongoing</span>
-                  </td>
-                </tr>
-                <tr className="border-b border-surface-variant hover:bg-surface-container-low transition-colors">
-                  <td className="py-3 px-4 font-label-sm text-label-sm">09:30 AM</td>
-                  <td className="py-3 px-4">Dressage Basics</td>
-                  <td className="py-3 px-4">Fatima A. / John D.</td>
-                  <td className="py-3 px-4">Desert Rose</td>
-                  <td className="py-3 px-4">
-                    <span className="bg-secondary-fixed/50 text-secondary px-2 py-1 rounded text-xs font-medium">Upcoming</span>
-                  </td>
-                </tr>
-                <tr className="border-b border-surface-variant hover:bg-surface-container-low transition-colors">
-                  <td className="py-3 px-4 font-label-sm text-label-sm">11:00 AM</td>
-                  <td className="py-3 px-4">Beginner Ride</td>
-                  <td className="py-3 px-4">Khalid M. / Guest</td>
-                  <td className="py-3 px-4">Spirit</td>
-                  <td className="py-3 px-4">
-                    <span className="bg-secondary-fixed/50 text-secondary px-2 py-1 rounded text-xs font-medium">Upcoming</span>
-                  </td>
-                </tr>
-                <tr className="border-b border-surface-variant hover:bg-surface-container-low transition-colors">
-                  <td className="py-3 px-4 font-label-sm text-label-sm">02:00 PM</td>
-                  <td className="py-3 px-4">Vet Inspection</td>
-                  <td className="py-3 px-4">Dr. Youssef</td>
-                  <td className="py-3 px-4">Shadow</td>
-                  <td className="py-3 px-4">
-                    <span className="bg-surface-variant text-on-surface-variant px-2 py-1 rounded text-xs font-medium">Scheduled</span>
-                  </td>
-                </tr>
+                {todaySchedule.length === 0 ? (
+                  <tr>
+                    <td colSpan={5} className="text-center py-8 text-on-surface-variant">
+                      <span className="material-symbols-outlined text-4xl opacity-50 text-secondary mb-3">calendar_today</span>
+                      <p className="font-label-sm">لا توجد حجوزات اليوم | No bookings for today</p>
+                      <Link href="/dashboard/bookings/new">
+                        <button className="mt-4 px-4 py-2 bg-secondary text-on-secondary rounded-lg font-label-sm transition-colors hover:bg-secondary/90">
+                          إضافة حجز | Add First Booking
+                        </button>
+                      </Link>
+                    </td>
+                  </tr>
+                ) : (
+                  todaySchedule.map((booking: any) => (
+                    <tr key={booking.id} className="border-b border-surface-variant hover:bg-surface-container-low transition-colors">
+                      <td className="py-3 px-4 font-label-sm text-label-sm">
+                        {booking.slot ? new Date(booking.slot.start_time).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) : 'N/A'}
+                      </td>
+                      <td className="py-3 px-4">{booking.service?.name_en || 'Unknown Service'}</td>
+                      <td className="py-3 px-4">
+                        {booking.trainer?.name_en || 'No Trainer'} / {booking.customer_name}
+                      </td>
+                      <td className="py-3 px-4">{booking.horse?.name_en || 'Any Horse'}</td>
+                      <td className="py-3 px-4">
+                        <span className={`px-2 py-1 rounded text-xs font-medium ${
+                          booking.status === 'confirmed' ? 'bg-[#e6f4ea] text-[#137333]' : 
+                          booking.status === 'pending' ? 'bg-[#fff8e1] text-[#f57f17]' : 
+                          'bg-surface-variant text-on-surface-variant'
+                        }`}>
+                          {booking.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

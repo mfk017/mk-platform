@@ -1,0 +1,18 @@
+  ▲ Next.js 14.2.7
+  - Local:        http://localhost:3000
+  - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 2.5s
+ ✓ Compiled /api/migrate in 208ms (55 modules)
+prisma:info Starting a postgresql pool with 17 connections in PgBouncer mode.
+prisma:error 
+Invalid `prisma.$executeRawUnsafe()` invocation:
+
+
+Can't reach database server at `aws-1-ap-south-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-ap-south-1.pooler.supabase.com:6543`.
+ GET /api/migrate 200 in 7338ms
+ ✓ Compiled in 813ms (202 modules)
+ ✓ Compiled in 263ms (202 modules)

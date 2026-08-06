@@ -26,8 +26,8 @@ export async function GET() {
       const pendingBookings = await db.booking.aggregate({
         where: { 
           center_id: center.id, 
-          status: 'completed', // Only completed bookings are paid out
-          payment_status: 'paid', // Only if customer has paid
+          status: { in: ['completed', 'confirmed'] }, // Only completed bookings are paid out
+          payment_status: { in: ['paid', 'completed'] }, // Include cash completed bookings
           payout_id: null 
         },
         _sum: { net_amount_to_center: true, booking_price: true, platform_fee: true, gateway_fee: true },
@@ -62,7 +62,7 @@ export async function PUT(req: NextRequest) {
 
   // 1. Get all pending bookings
   const pendingBookings = await db.booking.findMany({
-    where: { center_id: centerId, status: 'completed', payment_status: 'paid', payout_id: null },
+    where: { center_id: centerId, status: { in: ['completed', 'confirmed'] }, payment_status: { in: ['paid', 'completed'] }, payout_id: null },
     select: { id: true, net_amount_to_center: true, booking_price: true, platform_fee: true, gateway_fee: true }
   });
 

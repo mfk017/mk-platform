@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Search, Filter, Loader2, Calendar, User, Phone, CheckCircle, XCircle, Clock } from 'lucide-react';
+import Link from 'next/link';
+import { Search, Filter, Loader2, Calendar, User, Phone, CheckCircle, XCircle, Clock, Plus } from 'lucide-react';
 
 export default function BookingsPage() {
   const [bookings, setBookings] = useState<any[]>([]);
@@ -61,10 +62,16 @@ export default function BookingsPage() {
     <div className="flex-1 flex flex-col min-w-0 bg-surface h-screen overflow-hidden">
       <header className="h-20 flex items-center justify-between px-6 lg:px-8 border-b border-outline-variant/30 bg-surface-container-lowest shrink-0">
         <div>
-          <h2 className="font-display-lg text-title-md text-on-surface m-0 p-0">Bookings & Reservations</h2>
+          <h2 className="font-display-lg text-title-md text-on-surface m-0 p-0">الحجوزات | Bookings</h2>
           <p className="font-ibm-plex-sans text-label-sm text-on-surface-variant hidden sm:block">
-            Manage your customer reservations and schedules.
+            إدارة الحجوزات والمواعيد القادمة | Manage upcoming schedules and past bookings
           </p>
+        </div>
+        <div>
+          <Link href="/dashboard/bookings/new" className="bg-[#1B4332] hover:bg-[#153426] transition-colors text-white font-label-sm text-label-sm px-4 md:px-6 py-2 rounded-lg shadow-xl shadow-primary/10 flex items-center gap-2">
+            <Plus className="w-4 h-4" />
+            <span className="hidden sm:inline">حجز جديد | New Booking</span>
+          </Link>
         </div>
       </header>
 
@@ -103,12 +110,12 @@ export default function BookingsPage() {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="bg-tertiary-fixed/30 border-b border-outline-variant/30">
-                    <th className="px-6 py-4 font-label-sm text-on-surface-variant">Booking Ref</th>
-                    <th className="px-6 py-4 font-label-sm text-on-surface-variant">Customer</th>
-                    <th className="px-6 py-4 font-label-sm text-on-surface-variant">Service Details</th>
-                    <th className="px-6 py-4 font-label-sm text-on-surface-variant text-right">Net Revenue</th>
-                    <th className="px-6 py-4 font-label-sm text-on-surface-variant">Status</th>
-                    <th className="px-6 py-4 font-label-sm text-on-surface-variant text-right">Update Status</th>
+                    <th className="px-6 py-4 font-label-sm text-on-surface-variant">المرجع | Booking Ref</th>
+                    <th className="px-6 py-4 font-label-sm text-on-surface-variant">العميل | Customer</th>
+                    <th className="px-6 py-4 font-label-sm text-on-surface-variant">الخدمة | Service Details</th>
+                    <th className="px-6 py-4 font-label-sm text-on-surface-variant text-right">الصافي | Net Revenue</th>
+                    <th className="px-6 py-4 font-label-sm text-on-surface-variant">الحالة | Status</th>
+                    <th className="px-6 py-4 font-label-sm text-on-surface-variant text-right">تحديث الحالة | Update Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-outline-variant/20 font-ibm-plex-sans text-body-md text-on-surface">
@@ -116,13 +123,13 @@ export default function BookingsPage() {
                     <tr>
                       <td colSpan={6} className="p-12 text-center text-on-surface-variant">
                         <Loader2 className="w-8 h-8 animate-spin mx-auto text-primary" />
-                        <span className="block mt-4 font-label-sm">Loading bookings...</span>
+                        <span className="block mt-4 font-label-sm">جاري التحميل... | Loading bookings...</span>
                       </td>
                     </tr>
                   ) : bookings.length === 0 ? (
                     <tr>
                       <td colSpan={6} className="p-12 text-center text-on-surface-variant font-label-sm">
-                        {statusFilter ? `No ${statusFilter} bookings found.` : 'No bookings found.'}
+                        {statusFilter ? `No ${statusFilter} bookings found.` : 'لا توجد حجوزات | No bookings found.'}
                       </td>
                     </tr>
                   ) : (
@@ -161,10 +168,10 @@ export default function BookingsPage() {
                             onChange={(e) => updateStatus(b.id, e.target.value)}
                             className="px-3 py-1.5 rounded-lg border border-outline-variant/50 text-label-sm bg-surface-container focus:ring-1 focus:ring-primary focus:outline-none transition-shadow"
                           >
-                            <option value="pending">Pending</option>
-                            <option value="confirmed">Confirmed</option>
-                            <option value="completed">Completed</option>
-                            <option value="cancelled">Cancelled</option>
+                            <option value="pending">قيد الانتظار | Pending</option>
+                            <option value="confirmed">مؤكد | Confirmed</option>
+                            <option value="completed">مكتمل | Completed</option>
+                            <option value="cancelled">ملغي | Cancelled</option>
                           </select>
                         </td>
                       </tr>

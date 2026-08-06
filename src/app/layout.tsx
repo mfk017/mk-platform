@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import '@/styles/globals.css';
 
 export const metadata: Metadata = {
-  title: 'Canter | Equestrian Booking Platform',
+  title: 'منصة الحجوزات | Equestrian Booking Platform',
   description: 'Book certified riding lessons, horse stabling, and equestrian experiences in Saudi Arabia.',
 };
 

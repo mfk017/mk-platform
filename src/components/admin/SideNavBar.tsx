@@ -22,8 +22,7 @@ export default function SideNavBar() {
           <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>shield_person</span>
         </div>
         <div>
-          <h1 className="font-title-md text-title-md text-primary">Canter OS</h1>
-          <p className="font-label-xs text-label-xs text-on-surface-variant">Super Admin</p>
+          <h1 className="font-title-md text-title-md text-primary">Super Admin</h1>
         </div>
       </div>
 
@@ -75,10 +74,6 @@ export default function SideNavBar() {
           <span className="material-symbols-outlined">settings</span>
           Settings
         </Link>
-        <div className="flex items-center gap-3 px-4 py-3 text-on-surface-variant rounded-lg mx-2 my-1 font-label-sm text-label-sm opacity-50 cursor-not-allowed">
-          <span className="material-symbols-outlined">help</span>
-          Support (Soon)
-        </div>
         
         {/* User Profile Mini */}
         <div className="mt-4 px-4 flex items-center justify-between">

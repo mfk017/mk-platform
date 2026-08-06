@@ -55,16 +55,9 @@ export default function SideNavBar() {
       </div>
 
       <div className="mt-auto flex flex-col gap-2 pt-4 border-t border-outline-variant/30">
-        <button className="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg hover:bg-surface-container-high transition-colors text-left">
-          <span className="material-symbols-outlined">help</span>
-          <span className="font-label-sm text-label-sm">Support</span>
-        </button>
-        <button className="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg hover:bg-surface-container-high transition-colors text-left">
+        <button onClick={() => signOut({ callbackUrl: '/login' })} className="flex items-center gap-3 text-error hover:bg-error/10 px-4 py-3 rounded-lg transition-colors w-full text-left">
           <span className="material-symbols-outlined">logout</span>
-          <span className="font-label-sm text-label-sm">Logout</span>
-        </button>
-        <button className="mt-2 w-full py-2 border border-secondary text-secondary rounded-lg font-label-sm text-label-sm hover:bg-secondary/10 transition-colors">
-          Switch Tenant
+          <span className="font-label-sm text-label-sm">تسجيل الخروج | Logout</span>
         </button>
       </div>
     </nav>

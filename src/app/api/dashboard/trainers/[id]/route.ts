@@ -12,7 +12,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   }
 
   const body = await req.json();
-  const { name_en, name_ar, bio_en, bio_ar, specialty_en, specialty_ar, image_url } = body;
+  const { name_en, name_ar, bio_en, bio_ar, specialty_en, specialty_ar, image_url, is_active } = body;
 
   const trainer = await db.trainer.update({
     where: { id: params.id },
@@ -24,6 +24,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       specialty_en: specialty_en || null,
       specialty_ar: specialty_ar || null,
       image_url: image_url || null,
+      is_active: is_active ?? existing.is_active,
     },
   });
 

@@ -14,12 +14,21 @@ export async function GET() {
       orderBy: { created_at: 'desc' },
     }),
     db.booking.aggregate({
-      where: { center_id: centerId, payment_status: 'paid', status: 'completed' },
+      where: { 
+        center_id: centerId, 
+        payment_status: { in: ['paid', 'completed'] },
+        status: { in: ['completed', 'confirmed'] } 
+      },
       _sum: { net_amount_to_center: true, platform_fee: true, gateway_fee: true, booking_price: true },
       _count: { id: true },
     }),
     db.booking.aggregate({
-      where: { center_id: centerId, payment_status: 'paid', status: 'completed', payout_id: null },
+      where: { 
+        center_id: centerId, 
+        payment_status: { in: ['paid', 'completed'] },
+        status: { in: ['completed', 'confirmed'] }, 
+        payout_id: null 
+      },
       _sum: { net_amount_to_center: true },
     }),
   ]);

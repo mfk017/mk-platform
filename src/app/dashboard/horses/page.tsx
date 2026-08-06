@@ -14,10 +14,11 @@ export default function StableMapPage() {
   const [formData, setFormData] = useState({
     name_en: '',
     name_ar: '',
-    breed_en: '',
-    breed_ar: '',
-    age: '5',
+    breed: '',
+    year_of_birth: '',
+    image_url: '',
   });
+  const [isSaving, setIsSaving] = useState(false);
 
   const fetchHorses = async () => {
     try {
@@ -42,9 +43,9 @@ export default function StableMapPage() {
     setFormData({
       name_en: '',
       name_ar: '',
-      breed_en: '',
-      breed_ar: '',
-      age: '5',
+      breed: '',
+      year_of_birth: '',
+      image_url: '',
     });
     setIsModalOpen(true);
   };
@@ -52,11 +53,11 @@ export default function StableMapPage() {
   const openEditModal = (horse: any) => {
     setEditingHorseId(horse.id);
     setFormData({
-      name_en: horse.name_en,
-      name_ar: horse.name_ar,
-      breed_en: horse.breed_en,
-      breed_ar: horse.breed_ar,
-      age: horse.age.toString(),
+      name_en: horse.name_en || '',
+      name_ar: horse.name_ar || '',
+      breed: horse.breed || '',
+      year_of_birth: horse.year_of_birth ? horse.year_of_birth.toString() : '',
+      image_url: horse.image_url || '',
     });
     setIsModalOpen(true);
   };
@@ -75,9 +76,26 @@ export default function StableMapPage() {
     }
   };
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 4 * 1024 * 1024) {
+      alert('File is too large. Please select an image under 4MB.');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setFormData(prev => ({ ...prev, image_url: event.target?.result as string }));
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      setIsSaving(true);
       const url = editingHorseId 
         ? `/api/dashboard/horses/${editingHorseId}` 
         : '/api/dashboard/horses';
@@ -98,6 +116,8 @@ export default function StableMapPage() {
     } catch (error) {
       console.error(error);
       alert('An error occurred');
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -106,12 +126,15 @@ export default function StableMapPage() {
       {/* Header */}
       <header className="flex justify-between items-end mb-8">
         <div>
-          <h2 className="font-headline-lg text-primary tracking-tight">Stable Map & Livery</h2>
-          <p className="font-body-md text-on-surface-variant mt-1">Manage boarding, stall assignments, and health notes.</p>
+          <h2 className="font-display-lg text-title-md text-on-surface m-0 p-0">الخيل | Horses</h2>
+          <p className="font-ibm-plex-sans text-label-sm text-on-surface-variant hidden sm:block">
+            إدارة ملفات الخيل وحالتها الصحية | Manage your horses' profiles and health status
+          </p>
         </div>
         <div className="flex gap-4">
-          <button onClick={openCreateModal} className="bg-primary text-on-primary hover:bg-primary/90 px-6 py-2.5 rounded-lg font-label-sm transition-colors flex items-center gap-2">
-            <PlusSquare className="w-4 h-4" /> Add Horse
+          <button onClick={openCreateModal} className="flex items-center justify-center space-x-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm hover:bg-primary/90 transition-colors shadow-sm w-full sm:w-auto">
+            <Plus className="w-4 h-4" />
+            <span>إضافة خيل | Add Horse</span>
           </button>
         </div>
       </header>
@@ -151,13 +174,15 @@ export default function StableMapPage() {
                 <tr>
                   <td colSpan={4} className="p-8 text-center text-on-surface-variant">
                     <Loader2 className="w-6 h-6 animate-spin mx-auto" />
-                    <span className="block mt-2 font-label-sm">Loading...</span>
+                    <span className="block mt-4 font-label-sm">جاري التحميل... | Loading horses...</span>
                   </td>
                 </tr>
               ) : horses.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="p-8 text-center text-on-surface-variant font-label-sm">
-                    No horses found. Add one to get started.
+                  <td colSpan={4} className="p-8">
+                    <div className="p-12 bg-surface-container-lowest rounded-xl border border-secondary/10 text-center text-on-surface-variant font-label-sm shadow-sm">
+                      لا توجد خيل مضافة | No horses found. Add a horse to get started.
+                    </div>
                   </td>
                 </tr>
               ) : (
@@ -168,10 +193,9 @@ export default function StableMapPage() {
                       <div className="text-[10px] text-outline">{horse.name_ar}</div>
                     </td>
                     <td className="p-3">
-                      <div className="font-label-sm text-on-surface">{horse.breed_en}</div>
-                      <div className="text-[10px] text-outline">{horse.breed_ar}</div>
+                      <div className="font-label-sm text-on-surface">{horse.breed}</div>
                     </td>
-                    <td className="p-3 text-label-xs text-on-surface-variant">{horse.age} yrs</td>
+                    <td className="p-3 text-label-xs text-on-surface-variant">{horse.year_of_birth}</td>
                     <td className="p-3 text-right">
                       <button onClick={() => openEditModal(horse)} className="text-on-surface-variant hover:text-primary transition-colors p-1">
                         <Edit className="w-4 h-4" />
@@ -196,7 +220,7 @@ export default function StableMapPage() {
           <div className="relative bg-surface rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden z-10">
             <div className="px-6 py-4 border-b border-outline-variant/30 flex justify-between items-center">
               <div>
-                <h3 className="font-display-lg text-title-md text-on-surface">{editingHorseId ? 'Edit Horse' : 'Add New Horse'}</h3>
+                <h3 className="font-display-lg text-title-md text-on-surface">{editingHorseId ? 'تعديل الخيل | Edit Horse' : 'إضافة خيل | Add Horse'}</h3>
               </div>
               <button 
                 className="text-on-surface-variant hover:bg-surface-container-high p-1 rounded-full transition-colors"
@@ -210,29 +234,41 @@ export default function StableMapPage() {
               <form id="horseForm" onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="block text-label-sm">Horse Name (EN) *</label>
+                    <label className="block text-label-sm font-bold text-secondary">الاسم | Name (EN) *</label>
                     <input required value={formData.name_en} onChange={e => setFormData({...formData, name_en: e.target.value})} className="w-full px-3 py-2 bg-surface-container rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:outline-none" type="text" />
                   </div>
                   <div className="space-y-1">
-                    <label className="block text-label-sm" dir="rtl">اسم الخيل (AR) *</label>
+                    <label className="block text-label-sm font-bold text-secondary" dir="rtl">الاسم | Name (AR) *</label>
                     <input required value={formData.name_ar} onChange={e => setFormData({...formData, name_ar: e.target.value})} className="w-full px-3 py-2 bg-surface-container rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:outline-none text-right" dir="rtl" type="text" />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="block text-label-sm">Breed (EN) *</label>
-                    <input required value={formData.breed_en} onChange={e => setFormData({...formData, breed_en: e.target.value})} className="w-full px-3 py-2 bg-surface-container rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:outline-none" type="text" />
+                    <label className="block text-label-sm font-bold text-secondary">السلالة | Breed</label>
+                    <input value={formData.breed} onChange={e => setFormData({...formData, breed: e.target.value})} className="w-full px-3 py-2 bg-surface-container rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:outline-none" type="text" />
                   </div>
                   <div className="space-y-1">
-                    <label className="block text-label-sm" dir="rtl">السلالة (AR) *</label>
-                    <input required value={formData.breed_ar} onChange={e => setFormData({...formData, breed_ar: e.target.value})} className="w-full px-3 py-2 bg-surface-container rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:outline-none text-right" dir="rtl" type="text" />
+                    <label className="block text-label-sm font-bold text-secondary">سنة الميلاد | Year of Birth</label>
+                    <input value={formData.year_of_birth} onChange={e => setFormData({...formData, year_of_birth: e.target.value})} className="w-full px-3 py-2 bg-surface-container rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:outline-none" type="number" />
                   </div>
                 </div>
 
-                <div className="space-y-1">
-                  <label className="block text-label-sm">Age (Years) *</label>
-                  <input required value={formData.age} onChange={e => setFormData({...formData, age: e.target.value})} className="w-full px-3 py-2 bg-surface-container rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:outline-none" type="number" />
+                <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+                  <div className="space-y-1">
+                    <label className="block text-label-sm">Horse Photo</label>
+                    <div className="flex items-center gap-3">
+                      {(formData as any).image_url && (
+                        <img src={(formData as any).image_url} alt="Preview" className="w-10 h-10 rounded object-cover border border-outline-variant/50" />
+                      )}
+                      <input 
+                        type="file" 
+                        accept="image/*" 
+                        onChange={handleImageUpload}
+                        className="w-full text-xs text-on-surface-variant file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer" 
+                      />
+                    </div>
+                  </div>
                 </div>
               </form>
             </div>
@@ -243,14 +279,15 @@ export default function StableMapPage() {
                 className="px-4 py-2 font-label-sm text-primary hover:bg-primary/5 rounded-lg transition-colors"
                 onClick={() => setIsModalOpen(false)}
               >
-                Cancel
+                إلغاء | Cancel
               </button>
               <button 
                 type="submit"
                 form="horseForm"
-                className="px-6 py-2 bg-primary text-on-primary font-label-sm rounded-lg hover:bg-primary/90 shadow-sm"
+                disabled={isSaving}
+                className="px-6 py-2 bg-primary text-on-primary font-label-sm rounded-lg hover:bg-primary/90 shadow-sm disabled:opacity-50"
               >
-                {editingHorseId ? 'Save Changes' : 'Add Horse'}
+                {isSaving ? 'جاري الحفظ... | Saving...' : (editingHorseId ? 'حفظ التعديلات | Save Changes' : 'إضافة | Add Horse')}
               </button>
             </div>
           </div>

@@ -63,13 +63,11 @@ const navLinks = {
     { label: 'الخدمات', href: '#services-section' },
     { label: 'الخيول', href: '#horses-section' },
     { label: 'المدربون', href: '#trainers-section' },
-    { label: 'اتصل بنا', href: '#contact-section' },
   ],
   en: [
     { label: 'Services', href: '#services-section' },
     { label: 'Horses', href: '#horses-section' },
     { label: 'Instructors', href: '#trainers-section' },
-    { label: 'Contact', href: '#contact-section' },
   ],
 };
 
@@ -160,73 +158,6 @@ export function Footer({ centerName, lang, center, socialLinks }: FooterProps) {
           </ul>
         </div>
 
-        {/* Contact Column */}
-        <div className="flex flex-col gap-4">
-          <h3 className="font-title-md text-title-md text-on-primary mb-2">
-            {isAr ? 'تواصل معنا' : 'Get in Touch'}
-          </h3>
-          <ul className="flex flex-col gap-4">
-            {phone && (
-              <li>
-                <a
-                  href={`tel:${phone}`}
-                  className="flex items-center gap-3 text-on-primary/70 hover:text-on-primary transition-colors"
-                >
-                  <div className="w-8 h-8 rounded-lg bg-on-primary/10 flex items-center justify-center shrink-0">
-                    <Phone size={16} />
-                  </div>
-                  <span className="font-body-md text-body-md" dir="ltr">{phone}</span>
-                </a>
-              </li>
-            )}
-            {email && (
-              <li>
-                <a
-                  href={`mailto:${email}`}
-                  className="flex items-center gap-3 text-on-primary/70 hover:text-on-primary transition-colors"
-                >
-                  <div className="w-8 h-8 rounded-lg bg-on-primary/10 flex items-center justify-center shrink-0">
-                    <Mail size={16} />
-                  </div>
-                  <span className="font-body-md text-body-md">{email}</span>
-                </a>
-              </li>
-            )}
-            {whatsappNumber && (
-              <li>
-                <a
-                  href={`https://wa.me/${whatsappNumber.replace(/\D/g, '')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-on-primary/70 hover:text-on-primary transition-colors"
-                >
-                  <div className="w-8 h-8 rounded-lg bg-on-primary/10 flex items-center justify-center shrink-0">
-                    <WhatsAppIcon />
-                  </div>
-                  <span className="font-body-md text-body-md" dir="ltr">{whatsappNumber}</span>
-                </a>
-              </li>
-            )}
-            {center?.location_url && (
-              <li>
-                <a
-                  href={center.location_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-on-primary/70 hover:text-on-primary transition-colors"
-                >
-                  <div className="w-8 h-8 rounded-lg bg-on-primary/10 flex items-center justify-center shrink-0">
-                    <MapPin size={16} />
-                  </div>
-                  <span className="font-body-md text-body-md flex items-center gap-1">
-                    {center.city || (isAr ? 'عرض الموقع' : 'View Location')}
-                    <ExternalLink size={12} className="opacity-60" />
-                  </span>
-                </a>
-              </li>
-            )}
-          </ul>
-        </div>
       </div>
 
       {/* Bottom Bar */}
@@ -237,7 +168,14 @@ export function Footer({ centerName, lang, center, socialLinks }: FooterProps) {
           </span>
           <span>
             {isAr ? 'مدعوم من' : 'Powered by'}{' '}
-            <span className="text-on-primary/80 font-bold">Canter</span>
+            <a
+              href="https://mkplatform.sa"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-on-primary/80 font-bold hover:text-on-primary transition-colors"
+            >
+              MKplatform
+            </a>
           </span>
         </div>
       </div>

@@ -109,11 +109,11 @@ export default function MarketingHomePage() {
                     </div>
                     <div className="bg-white/5 rounded-2xl p-4 border border-white/5 transition-colors group-hover:bg-white/[0.07]">
                       <div className="text-[10px] text-slate-400 mb-1 font-medium">{isAr ? 'الإيرادات' : 'Revenue'}</div>
-                      <div className="text-xl font-black text-emerald-400">4,200 <span className="text-xs font-bold text-emerald-500/50">SAR</span></div>
+                      <div className="text-xl font-black text-emerald-400">84,200 <span className="text-xs font-bold text-emerald-500/50">SAR</span></div>
                     </div>
                     <div className="bg-white/5 rounded-2xl p-4 border border-white/5 transition-colors group-hover:bg-white/[0.07]">
                       <div className="text-[10px] text-slate-400 mb-1 font-medium">{isAr ? 'العملاء' : 'Clients'}</div>
-                      <div className="text-xl font-black text-blue-400">89</div>
+                      <div className="text-xl font-black text-blue-400">1,450</div>
                     </div>
                   </div>
                   {/* Mock Schedule List */}
@@ -191,9 +191,9 @@ export default function MarketingHomePage() {
             
             <div className="grid md:grid-cols-3 gap-6">
               {[
-                { name: 'Khalid Al-Saud', role: 'Owner', center: 'Al-Faris Equestrian', quote: 'MK completely transformed how we manage our riding school. The automated payments save us hours of work every week.' },
-                { name: 'Sara Al-Ghamdi', role: 'Manager', center: 'Riyadh Riders', quote: 'The WhatsApp notifications drastically reduced our no-show rate. Best investment for our center.' },
-                { name: 'Fahad Al-Otaibi', role: 'Head Coach', center: 'Jeddah Stables', quote: 'Clients love the easy booking interface, and I love having my schedule perfectly organized in the dashboard.' }
+                { name: isAr ? 'خالد السعود' : 'Khalid Al-Saud', role: isAr ? 'مالك' : 'Owner', center: isAr ? 'فرسان الأصالة' : 'Al-Faris Equestrian', quote: isAr ? 'المنصة غيرت بالكامل طريقة إدارتنا للمركز. الدفع الإلكتروني وفر علينا ساعات من العمل كل أسبوع.' : 'MK completely transformed how we manage our riding school. The automated payments save us hours of work every week.' },
+                { name: isAr ? 'سارة الغامدي' : 'Sara Al-Ghamdi', role: isAr ? 'مديرة عمليات' : 'Manager', center: isAr ? 'نادي الرياض للفروسية' : 'Riyadh Riders', quote: isAr ? 'بفضل النظام، ارتفعت مبيعاتنا بشكل ملحوظ وأصبحنا ندير الجداول التدريبية باحترافية وسهولة تامة. استثمار ممتاز.' : 'Thanks to the system, our sales increased significantly and we manage training schedules easily and professionally. Excellent investment.' },
+                { name: isAr ? 'فهد العتيبي' : 'Fahad Al-Otaibi', role: isAr ? 'مدرب أول' : 'Head Coach', center: isAr ? 'اسطبلات جدة' : 'Jeddah Stables', quote: isAr ? 'العملاء يحبون واجهة الحجز السهلة، وأنا أحب أن يكون جدولي منظم بشكل مثالي على لوحة التحكم يومياً.' : 'Clients love the easy booking interface, and I love having my schedule perfectly organized in the dashboard.' }
               ].map((t, i) => (
                 <div key={i} className="bg-[#040405] border border-white/10 rounded-3xl p-8 relative hover:border-white/20 transition-colors fade-in-section opacity-0 translate-y-4" style={{ transitionDelay: `${i * 150}ms` }}>
                   <div className="text-violet-500 mb-6 flex gap-1">

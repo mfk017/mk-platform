@@ -19,7 +19,18 @@ export default function ServicesManagementPage() {
     category: 'training',
     description_en: '',
     description_ar: '',
+    image_url: '',
+    livery_months: [] as string[],
+    capacity: '1',
+    skill_level: 'beginner',
+    requires_instructor: true,
+    allow_multiple_seats: false,
+    allow_customer_cancellation: true,
+    allow_rescheduling: true,
+    cancellation_compensation: 'credit',
+    is_active: true,
   });
+  const [newMonth, setNewMonth] = useState('');
 
   const router = useRouter();
 
@@ -51,7 +62,18 @@ export default function ServicesManagementPage() {
       category: 'training',
       description_en: '',
       description_ar: '',
+      image_url: '',
+      livery_months: [],
+      capacity: '1',
+      skill_level: 'beginner',
+      requires_instructor: true,
+      allow_multiple_seats: false,
+      allow_customer_cancellation: true,
+      allow_rescheduling: true,
+      cancellation_compensation: 'credit',
+      is_active: true,
     });
+    setNewMonth('');
     setIsModalOpen(true);
   };
 
@@ -65,8 +87,41 @@ export default function ServicesManagementPage() {
       category: service.category,
       description_en: service.description_en || '',
       description_ar: service.description_ar || '',
+      image_url: service.image_url || '',
+      livery_months: Array.isArray(service.livery_months) ? service.livery_months : [],
+      capacity: '1',
+      skill_level: 'beginner',
+      requires_instructor: true,
+      allow_multiple_seats: false,
+      allow_customer_cancellation: true,
+      allow_rescheduling: true,
+      cancellation_compensation: 'credit',
+      is_active: service.is_active ?? true,
     });
+    setNewMonth('');
     setIsModalOpen(true);
+  };
+
+  const addLiveryMonth = () => {
+    if (newMonth && !formData.livery_months.includes(newMonth)) {
+      setFormData({ ...formData, livery_months: [...formData.livery_months, newMonth].sort() });
+      setNewMonth('');
+    }
+  };
+
+  const removeLiveryMonth = (m: string) => {
+    setFormData({ ...formData, livery_months: formData.livery_months.filter(x => x !== m) });
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData({ ...formData, image_url: reader.result as string });
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleDelete = async (id: string) => {
@@ -107,15 +162,20 @@ export default function ServicesManagementPage() {
       console.error(error);
       alert('An error occurred');
     }
+    } finally {
+      setIsSaving(false);
+    }
   };
+
+  const filteredServices = services.filter(s => categoryFilter === 'all' ? true : s.category === categoryFilter);
 
   return (
     <div className="flex-1 flex flex-col min-w-0 bg-surface h-screen overflow-hidden">
       <header className="h-20 flex items-center justify-between px-6 lg:px-8 border-b border-outline-variant/30 bg-surface-container-lowest shrink-0">
         <div>
-          <h2 className="font-display-lg text-title-md text-on-surface m-0 p-0">Service Management</h2>
+          <h2 className="font-display-lg text-title-md text-on-surface m-0 p-0">الخدمات | Services</h2>
           <p className="font-ibm-plex-sans text-label-sm text-on-surface-variant hidden sm:block">
-            Manage your catalog of equestrian services, pricing, and availability.
+            إدارة خدمات الركوب والإيواء | Manage your riding and livery services
           </p>
         </div>
       </header>
@@ -124,34 +184,19 @@ export default function ServicesManagementPage() {
         <div className="max-w-7xl mx-auto space-y-6 pb-24 md:pb-0">
           
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-surface-container-lowest p-4 rounded-xl border border-secondary/10 shadow-sm">
-            <div className="relative w-full sm:w-96">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant w-4 h-4" />
-              <input 
-                className="w-full pl-10 pr-4 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none font-ibm-plex-sans text-body-md transition-shadow" 
-                placeholder="Search services..." 
-                type="text" 
-              />
+            <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0">
+              <button onClick={() => setCategoryFilter('all')} className={`whitespace-nowrap px-4 py-2 rounded-lg font-label-sm transition-colors ${categoryFilter === 'all' ? 'bg-primary text-on-primary' : 'bg-surface-container hover:bg-surface-container-high text-on-surface'}`}>الكل | All</button>
+              <button onClick={() => setCategoryFilter('training')} className={`whitespace-nowrap px-4 py-2 rounded-lg font-label-sm transition-colors ${categoryFilter === 'training' ? 'bg-primary text-on-primary' : 'bg-surface-container hover:bg-surface-container-high text-on-surface'}`}>تدريب | Training</button>
+              <button onClick={() => setCategoryFilter('livery')} className={`whitespace-nowrap px-4 py-2 rounded-lg font-label-sm transition-colors ${categoryFilter === 'livery' ? 'bg-primary text-on-primary' : 'bg-surface-container hover:bg-surface-container-high text-on-surface'}`}>إيواء | Livery</button>
             </div>
-            <div className="flex items-center space-x-3 w-full sm:w-auto">
-              <button className="flex items-center justify-center space-x-2 px-4 py-2 border border-secondary text-secondary rounded-lg font-label-sm hover:bg-secondary/10 transition-colors w-full sm:w-auto bg-surface-container-lowest">
-                <Filter className="w-4 h-4" />
-                <span>Filter</span>
-              </button>
-              <button 
-                onClick={openCreateModal}
-                className="flex items-center justify-center space-x-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm hover:bg-primary/90 transition-colors shadow-sm w-full sm:w-auto"
-              >
-                <Plus className="w-4 h-4" />
-                <span>Create Service</span>
-              </button>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-surface-container-lowest p-5 rounded-xl border border-secondary/10 shadow-sm flex flex-col relative overflow-hidden">
-              <span className="text-on-surface-variant font-label-sm mb-1">Active Services</span>
-              <span className="font-display-lg text-headline-lg text-on-surface">{services.length}</span>
-            </div>
+            
+            <button 
+              onClick={openCreateModal}
+              className="flex items-center justify-center space-x-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-sm hover:bg-primary/90 transition-colors shadow-sm w-full sm:w-auto"
+            >
+              <Plus className="w-4 h-4" />
+              <span>إضافة خدمة | Add Service</span>
+            </button>
           </div>
 
           <div className="bg-surface-container-lowest rounded-xl border border-secondary/10 shadow-sm overflow-hidden">
@@ -159,11 +204,11 @@ export default function ServicesManagementPage() {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="bg-tertiary-fixed/30 border-b border-outline-variant/30">
-                    <th className="px-6 py-4 font-label-sm text-on-surface-variant w-1/3">Service Name</th>
-                    <th className="px-6 py-4 font-label-sm text-on-surface-variant">Category</th>
-                    <th className="px-6 py-4 font-label-sm text-on-surface-variant text-right">Price (SAR)</th>
-                    <th className="px-6 py-4 font-label-sm text-on-surface-variant text-center">Duration</th>
-                    <th className="px-6 py-4 font-label-sm text-on-surface-variant text-right">Actions</th>
+                    <th className="px-6 py-4 font-label-sm text-on-surface-variant w-1/3">الخدمة | Service Name</th>
+                    <th className="px-6 py-4 font-label-sm text-on-surface-variant">الفئة | Category</th>
+                    <th className="px-6 py-4 font-label-sm text-on-surface-variant text-right">السعر | Price (SAR)</th>
+                    <th className="px-6 py-4 font-label-sm text-on-surface-variant text-center">المدة | Duration</th>
+                    <th className="px-6 py-4 font-label-sm text-on-surface-variant text-right">إجراءات | Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-outline-variant/20 font-ibm-plex-sans text-body-md text-on-surface">
@@ -171,17 +216,17 @@ export default function ServicesManagementPage() {
                     <tr>
                       <td colSpan={5} className="px-6 py-8 text-center text-on-surface-variant">
                         <Loader2 className="w-6 h-6 animate-spin mx-auto" />
-                        <span className="block mt-2 font-label-sm">Loading...</span>
+                        <span className="block mt-4 font-label-sm">جاري التحميل | Loading services...</span>
                       </td>
                     </tr>
-                  ) : services.length === 0 ? (
+                  ) : filteredServices.length === 0 ? (
                     <tr>
                       <td colSpan={5} className="px-6 py-8 text-center text-on-surface-variant font-label-sm">
-                        No services found. Create one to get started.
+                        لا توجد خدمات | No services found.
                       </td>
                     </tr>
                   ) : (
-                    services.map(service => (
+                    filteredServices.map(service => (
                       <tr key={service.id} className="hover:bg-surface-container-low transition-colors group">
                         <td className="px-6 py-4">
                           <div className="flex items-center space-x-3">
@@ -217,79 +262,97 @@ export default function ServicesManagementPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-on-background/40 backdrop-blur-sm transition-opacity" onClick={() => setIsModalOpen(false)}></div>
           
-          <div className="relative bg-surface-container-lowest rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden transform transition-all border border-secondary/10 z-10">
-            <div className="px-6 py-4 border-b border-outline-variant/30 flex justify-between items-center bg-surface">
-              <div>
-                <h3 className="font-display-lg text-title-md text-on-surface">{editingServiceId ? 'Edit Service' : 'Create New Service'}</h3>
-                <p className="font-ibm-plex-sans text-label-xs text-on-surface-variant">{editingServiceId ? 'Update service details.' : 'Add details for the new offering.'}</p>
-              </div>
-              <button 
-                className="text-on-surface-variant hover:text-on-surface p-1 rounded-full hover:bg-surface-container-high transition-colors"
-                onClick={() => setIsModalOpen(false)}
-              >
-                <Plus className="w-5 h-5 rotate-45" />
+          <div className="relative bg-surface rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden z-10 font-sans" dir="rtl">
+            <div className="px-6 py-5 border-b border-outline-variant/30 flex justify-between items-center">
+              <h3 className="text-title-md text-on-surface">{editingServiceId ? 'تعديل خدمة | Edit Service' : 'إضافة خدمة جديدة | Add New Service'}</h3>
+              <button className="text-on-surface-variant hover:text-on-surface p-1" onClick={() => setIsModalOpen(false)}>
+                <span className="material-symbols-outlined">close</span>
               </button>
             </div>
 
-            <div className="p-6 overflow-y-auto font-ibm-plex-sans flex-1">
-              <form id="serviceForm" onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="block text-label-sm text-on-surface">Service Name (EN) *</label>
-                    <input required value={formData.name_en} onChange={e => setFormData({...formData, name_en: e.target.value})} className="w-full px-3 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-shadow" type="text" />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="block text-label-sm text-on-surface" dir="rtl">اسم الخدمة (AR) *</label>
-                    <input required value={formData.name_ar} onChange={e => setFormData({...formData, name_ar: e.target.value})} className="w-full px-3 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-shadow text-right" dir="rtl" type="text" />
-                  </div>
-                </div>
-
+            <div className="px-6 pb-6 overflow-y-auto">
+              <form id="serviceForm" onSubmit={handleSubmit} className="space-y-6 mt-6">
+                
                 <div className="space-y-1">
-                  <label className="block text-label-sm text-on-surface">Category *</label>
-                  <select required value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})} className="w-full px-3 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-shadow">
-                    <option value="training">Training & Lessons</option>
-                    <option value="livery">Boarding / Livery</option>
-                    <option value="experience">Experiences & Tours</option>
-                    <option value="package">Package</option>
+                  <label className="block text-label-sm font-bold text-secondary">الفئة | Category *</label>
+                  <select required value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})} className="w-full px-3 py-2 bg-surface-container rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:outline-none">
+                    <option value="training">تدريب | Training</option>
+                    <option value="livery">إيواء | Livery</option>
+                    <option value="experience">تجارب | Experience</option>
                   </select>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="block text-label-sm text-on-surface">Price (SAR) *</label>
-                    <input required value={formData.price} onChange={e => setFormData({...formData, price: e.target.value})} className="w-full px-3 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-shadow" type="number" step="0.01" />
+                    <label className="block text-label-sm font-bold text-secondary">الاسم | Name (EN) *</label>
+                    <input required value={formData.name_en} onChange={e => setFormData({...formData, name_en: e.target.value})} className="w-full px-3 py-2 bg-surface-container rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:outline-none" type="text" />
                   </div>
                   <div className="space-y-1">
-                    <label className="block text-label-sm text-on-surface">Duration (Minutes) *</label>
-                    <input required value={formData.duration_minutes} onChange={e => setFormData({...formData, duration_minutes: e.target.value})} className="w-full px-3 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-shadow" type="number" />
+                    <label className="block text-label-sm font-bold text-secondary" dir="rtl">الاسم | Name (AR) *</label>
+                    <input required value={formData.name_ar} onChange={e => setFormData({...formData, name_ar: e.target.value})} className="w-full px-3 py-2 bg-surface-container rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:outline-none text-right" dir="rtl" type="text" />
                   </div>
                 </div>
 
-                <div className="space-y-1">
-                  <label className="block text-label-sm text-on-surface">Description (EN)</label>
-                  <textarea value={formData.description_en} onChange={e => setFormData({...formData, description_en: e.target.value})} className="w-full px-3 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-shadow" rows={2}></textarea>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="block text-label-sm font-bold text-secondary">الوصف | Description (EN)</label>
+                    <textarea value={formData.description_en} onChange={e => setFormData({...formData, description_en: e.target.value})} className="w-full px-3 py-2 bg-surface-container rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:outline-none" rows={2}></textarea>
+                  </div>
+                  <div className="space-y-1">
+                    <label className="block text-label-sm font-bold text-secondary" dir="rtl">الوصف | Description (AR)</label>
+                    <textarea value={formData.description_ar} onChange={e => setFormData({...formData, description_ar: e.target.value})} className="w-full px-3 py-2 bg-surface-container rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:outline-none text-right" dir="rtl" rows={2}></textarea>
+                  </div>
                 </div>
-                <div className="space-y-1">
-                  <label className="block text-label-sm text-on-surface" dir="rtl">الوصف (AR)</label>
-                  <textarea value={formData.description_ar} onChange={e => setFormData({...formData, description_ar: e.target.value})} className="w-full px-3 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-shadow text-right" dir="rtl" rows={2}></textarea>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="space-y-1">
+                    <label className="block text-label-sm font-bold text-secondary">السعر | Price (SAR) *</label>
+                    <input required value={formData.price} onChange={e => setFormData({...formData, price: e.target.value})} className="w-full px-3 py-2 bg-surface-container rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:outline-none" type="number" step="0.01" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="block text-label-sm font-bold text-secondary">المدة | Duration (Mins) *</label>
+                    <input required value={formData.duration_minutes} onChange={e => setFormData({...formData, duration_minutes: e.target.value})} className="w-full px-3 py-2 bg-surface-container rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:outline-none" type="number" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="block text-label-sm font-bold text-secondary">السعة | Capacity *</label>
+                    <input required value={formData.capacity} onChange={e => setFormData({...formData, capacity: e.target.value})} className="w-full px-3 py-2 bg-surface-container rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:outline-none" type="number" />
+                  </div>
                 </div>
+
+                {formData.category === 'livery' && (
+                  <div className="space-y-2 p-4 bg-surface-container rounded-xl border border-outline-variant/20">
+                    <label className="block text-label-sm font-bold text-secondary">الأشهر المتاحة | Livery Months</label>
+                    <div className="flex gap-2">
+                      <input type="month" value={newMonth} onChange={e => setNewMonth(e.target.value)} className="flex-1 px-3 py-2 bg-surface rounded-lg border border-outline-variant/50" />
+                      <button type="button" onClick={addLiveryMonth} className="px-4 py-2 bg-secondary text-on-secondary rounded-lg font-label-sm">إضافة</button>
+                    </div>
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      {formData.livery_months.map((m: string) => (
+                        <span key={m} className="inline-flex items-center gap-1 bg-secondary/10 text-secondary px-3 py-1 rounded-full text-xs font-medium">
+                          {m}
+                          <button type="button" onClick={() => removeLiveryMonth(m)}>&times;</button>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </form>
             </div>
-
-            <div className="px-6 py-4 border-t border-outline-variant/30 bg-surface flex justify-end space-x-3 shrink-0">
+            <div className="px-6 py-4 border-t border-outline-variant/30 flex justify-end space-x-3">
               <button 
                 type="button"
-                className="px-4 py-2 font-label-sm text-primary hover:bg-primary/5 rounded-lg transition-colors"
                 onClick={() => setIsModalOpen(false)}
+                className="px-5 py-2 text-on-surface-variant font-label-md hover:bg-surface-container rounded-lg transition-colors"
               >
-                Cancel
+                إلغاء | Cancel
               </button>
               <button 
                 type="submit"
                 form="serviceForm"
-                className="px-6 py-2 bg-primary text-on-primary font-label-sm rounded-lg hover:bg-primary/90 transition-colors shadow-sm"
+                disabled={isSaving}
+                className="px-5 py-2 bg-primary text-on-primary font-label-md rounded-lg hover:bg-primary/90 transition-colors shadow-sm disabled:opacity-50"
               >
-                {editingServiceId ? 'Save Changes' : 'Create Service'}
+                {isSaving ? 'جاري الحفظ... | Saving...' : (editingServiceId ? 'حفظ التعديلات | Save Changes' : 'إضافة | Create')}
               </button>
             </div>
           </div>

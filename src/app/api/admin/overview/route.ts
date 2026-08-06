@@ -17,7 +17,7 @@ export async function GET() {
     db.center.count(),
     db.booking.count(),
     db.booking.aggregate({
-      where: { payment_status: 'paid' },
+      where: { payment_status: { in: ['paid', 'completed'] } },
       _sum: { booking_price: true, platform_fee: true },
     }),
     db.payout.aggregate({

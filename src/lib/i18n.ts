@@ -2,7 +2,7 @@ export type Language = 'en' | 'ar';
 
 export const translations = {
   en: {
-    brandName: 'CANTER',
+    brandName: 'EQUESTRIAN',
     tagline: 'Equestrian Center Booking & Management',
     languageToggle: 'العربية',
     switchLang: 'ar',
@@ -15,14 +15,14 @@ export const translations = {
     viewCenter: 'Visit Booking Portal',
     activeCenter: 'Verified Center',
     cityLabel: 'City',
-    poweredBy: 'Powered by Canter',
+    poweredBy: 'Powered by Platform',
 
     // Navbar
     navServices: 'Services',
     navPackages: 'Packages',
     navLivery: 'Livery',
     navMyBookings: 'My Bookings',
-    visitPlatform: 'Visit Canter Platform',
+    visitPlatform: 'Visit Platform',
 
     // Center Hero / Header
     certifiedCenter: 'Verified Equestrian Facility',

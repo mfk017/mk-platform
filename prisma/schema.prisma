@@ -33,6 +33,9 @@ model Center {
   status               String         @default("active") // active | inactive | pending
   terms_accepted_at    DateTime?
   commission_rate      Float          @default(6.0)
+  working_hours        Json?
+  work_start_hour      Int            @default(9)
+  work_end_hour        Int            @default(21)
   created_at           DateTime       @default(now())
 
   users                User[]
@@ -75,6 +78,7 @@ model Service {
   description_ar   String?
   image_url        String?
   is_active        Boolean        @default(true)
+  livery_months    Json?          // JSON array of available months e.g. ["2026-08","2026-09"]
   target_service_id String?
   created_at       DateTime       @default(now())
 

@@ -15,6 +15,8 @@ export async function GET() {
       phone: true, email: true, whatsapp_number: true,
       location_url: true, city: true, vat_enabled: true,
       instagram_url: true, snapchat_url: true, tiktok_url: true, twitter_url: true,
+      working_hours: true,
+      work_start_hour: true, work_end_hour: true,
     },
   });
 
@@ -31,6 +33,8 @@ export async function PUT(req: NextRequest) {
     phone, email, whatsapp_number, location_url, city,
     logo_url, hero_image_url, vat_enabled,
     instagram_url, snapchat_url, tiktok_url, twitter_url,
+    working_hours,
+    work_start_hour, work_end_hour,
   } = body;
 
   const center = await db.center.update({
@@ -52,6 +56,9 @@ export async function PUT(req: NextRequest) {
       ...(snapchat_url !== undefined && { snapchat_url }),
       ...(tiktok_url !== undefined && { tiktok_url }),
       ...(twitter_url !== undefined && { twitter_url }),
+      ...(working_hours !== undefined && { working_hours }),
+      ...(work_start_hour !== undefined && { work_start_hour: parseInt(work_start_hour) }),
+      ...(work_end_hour !== undefined && { work_end_hour: parseInt(work_end_hour) }),
     },
   });
 

@@ -17,20 +17,18 @@ const navLinks = {
     { label: 'الخدمات', href: '#services-section' },
     { label: 'الخيول', href: '#horses-section' },
     { label: 'المدربون', href: '#trainers-section' },
-    { label: 'اتصل بنا', href: '#contact-section' },
   ],
   en: [
     { label: 'Services', href: '#services-section' },
     { label: 'Horses', href: '#horses-section' },
     { label: 'Instructors', href: '#trainers-section' },
-    { label: 'Contact', href: '#contact-section' },
   ],
 };
 
 export function Header({
   lang,
   onLanguageChange,
-  centerName = 'The Canter Platform',
+  centerName = 'Equestrian Center',
   centerLogo,
   onOpenMyBookings,
   onBookNowClick,

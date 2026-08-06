@@ -12,7 +12,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   }
 
   const body = await req.json();
-  const { name_en, name_ar, price, original_price, discount_percent, session_count, duration_minutes, category, description_en, description_ar, target_service_id } = body;
+  const { name_en, name_ar, price, original_price, discount_percent, session_count, duration_minutes, category, description_en, description_ar, target_service_id, image_url, livery_months, is_active } = body;
 
   const service = await db.service.update({
     where: { id: params.id },
@@ -26,7 +26,10 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       category,
       description_en: description_en || null,
       description_ar: description_ar || null,
+      image_url: image_url || null,
+      livery_months: category === 'livery' && Array.isArray(livery_months) ? livery_months : undefined,
       target_service_id: category === 'package' ? target_service_id : null,
+      is_active: typeof is_active === 'boolean' ? is_active : true,
     },
   });
 
