@@ -218,7 +218,7 @@ export default function ServicesManagementPage() {
                     <tr>
                       <td colSpan={5} className="px-6 py-8 text-center text-on-surface-variant">
                         <Loader2 className="w-6 h-6 animate-spin mx-auto" />
-                        <span className="block mt-4 font-label-sm">جاري التحميل | Loading services...</span>
+                        <span className="block mt-4 font-label-sm">جاري تحميل الخدمات... | Loading services...</span>
                       </td>
                     </tr>
                   ) : filteredServices.length === 0 ? (
@@ -326,7 +326,7 @@ export default function ServicesManagementPage() {
                     <label className="block text-label-sm font-bold text-secondary">الأشهر المتاحة | Livery Months</label>
                     <div className="flex gap-2">
                       <input type="month" value={newMonth} onChange={e => setNewMonth(e.target.value)} className="flex-1 px-3 py-2 bg-surface rounded-lg border border-outline-variant/50" />
-                      <button type="button" onClick={addLiveryMonth} className="px-4 py-2 bg-secondary text-on-secondary rounded-lg font-label-sm">إضافة</button>
+                      <button type="button" onClick={addLiveryMonth} className="px-4 py-2 bg-secondary text-on-secondary rounded-lg font-label-sm">إضافة | Add</button>
                     </div>
                     <div className="flex flex-wrap gap-2 mt-3">
                       {formData.livery_months.map((m: string) => (

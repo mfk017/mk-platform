@@ -59,10 +59,10 @@ export default function DashboardOverview() {
           <div className="flex justify-between items-start mb-6">
             <h2 className="font-title-md text-title-md text-primary flex items-center gap-2">
               <span className="material-symbols-outlined text-secondary">payments</span>
-              Financial Overview
+              نظرة مالية | Financial Overview
             </h2>
             <span className="bg-primary-container text-on-primary-container font-label-xs text-label-xs px-2 py-1 rounded">
-              Last 30 Days
+              آخر 30 يوم | Last 30 Days
             </span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -72,14 +72,14 @@ export default function DashboardOverview() {
               <h3 className="font-headline-lg-mobile text-primary font-bold">SAR {stats.todayRevenue?.toLocaleString() ?? 0}</h3>
               <p className="font-label-xs text-label-xs text-[#3f6653] mt-2 flex items-center gap-1">
                 <span className="material-symbols-outlined text-[14px]">trending_up</span>
-                Real data
+                بيانات حية | Real data
               </p>
             </div>
             {/* Platform Fees */}
             <div className="border-l-4 border-secondary pl-4">
-              <p className="font-label-sm text-label-sm text-on-surface-variant mb-1">Platform Fees</p>
+              <p className="font-label-sm text-label-sm text-on-surface-variant mb-1">رسوم المنصة | Platform Fees</p>
               <p className="font-title-md text-title-md text-on-surface">SAR {stats.totalPlatformFees?.toLocaleString() ?? 0}</p>
-              <p className="font-label-xs text-label-xs text-on-surface-variant mt-2">Deducted automatically</p>
+              <p className="font-label-xs text-label-xs text-on-surface-variant mt-2">تخصم تلقائياً | Deducted automatically</p>
             </div>
             {/* Active Bookings */}
             <div className="border-l-4 border-inverse-primary pl-4">
@@ -87,7 +87,7 @@ export default function DashboardOverview() {
               <h3 className="font-headline-lg-mobile text-primary font-bold">{stats.todayBookings ?? 0}</h3>
               <p className="font-label-xs text-label-xs text-[#3f6653] mt-2 flex items-center gap-1">
                 <span className="material-symbols-outlined text-[14px]">check_circle</span>
-                Confirmed
+                مؤكد | Confirmed
               </p>
             </div>
           </div>
@@ -204,12 +204,12 @@ export default function DashboardOverview() {
               style={{ backgroundImage: "url('https://images.unsplash.com/photo-1598974357801-cbca100e65d3?auto=format&fit=crop&w=600&q=80')" }}
             ></div>
             <div className="relative z-10">
-              <h3 className="font-title-md text-title-md mb-2">Trainer Availability</h3>
+              <h3 className="font-title-md text-title-md mb-2">توفر المدربين | Trainer Availability</h3>
               <p className="font-body-md text-body-md text-inverse-primary mb-6">
-                Update schedules for the upcoming busy season.
+                تحديث الجداول للموسم القادم | Update schedules for the upcoming busy season.
               </p>
-              <Link href="/dashboard/services" className="bg-white text-primary font-label-sm text-label-sm px-4 py-2 rounded-lg hover:bg-surface-container-low transition-colors shadow-sm flex items-center gap-2 w-max">
-                Manage Trainers
+              <Link href="/dashboard/trainers" className="bg-white text-primary font-label-sm text-label-sm px-4 py-2 rounded-lg hover:bg-surface-container-low transition-colors shadow-sm flex items-center gap-2 w-max">
+                إدارة المدربين | Manage Trainers
                 <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
               </Link>
             </div>
@@ -218,12 +218,12 @@ export default function DashboardOverview() {
           {/* Weather / Environment Card */}
           <div className="bg-surface rounded-xl shadow-xl shadow-primary/5 border border-secondary/10 p-6 flex items-center justify-between">
             <div>
-              <p className="font-label-sm text-label-sm text-on-surface-variant mb-1">Current Conditions</p>
+              <p className="font-label-sm text-label-sm text-on-surface-variant mb-1">حالة الطقس | Current Conditions</p>
               <div className="flex items-end gap-2">
                 <span className="font-display-lg text-display-lg text-primary">28°C</span>
-                <span className="font-body-md text-body-md text-on-surface-variant mb-2">Riyadh</span>
+                <span className="font-body-md text-body-md text-on-surface-variant mb-2">الرياض | Riyadh</span>
               </div>
-              <p className="font-label-xs text-label-xs text-[#3f6653]">Perfect riding weather</p>
+              <p className="font-label-xs text-label-xs text-[#3f6653]">طقس مثالي للركوب | Perfect riding weather</p>
             </div>
             <div className="text-secondary opacity-80">
               <span className="material-symbols-outlined text-[64px]">light_mode</span>

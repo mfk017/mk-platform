@@ -155,7 +155,7 @@ export default function TrainersPage() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant w-4 h-4" />
               <input 
                 className="w-full pl-10 pr-4 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none font-ibm-plex-sans text-body-md transition-shadow" 
-                placeholder="Search instructors..." 
+                placeholder="ابحث في المدربين... | Search instructors..." 
                 type="text" 
               />
             </div>
@@ -197,7 +197,7 @@ export default function TrainersPage() {
                     </div>
                     
                     <h3 className="font-title-md text-on-surface">{trainer.name_en}</h3>
-                    <p className="text-label-sm text-primary mb-3">{trainer.specialty_en || 'General Instructor'}</p>
+                    <p className="text-label-sm text-primary mb-3">{trainer.specialty_en || 'مدرب عام | General Instructor'}</p>
                     
                     <p className="text-body-sm text-on-surface-variant flex-1 line-clamp-3 mb-4">
                       {trainer.bio_en}
@@ -205,7 +205,7 @@ export default function TrainersPage() {
                     
                     <div className="mt-auto pt-4 border-t border-outline-variant/30 flex justify-between items-center text-label-xs text-on-surface-variant">
                       <span className="flex items-center"><Star className="w-3 h-3 text-secondary mr-1" /> 4.9 (120)</span>
-                      <span className="flex items-center"><Clock className="w-3 h-3 mr-1" /> 14 hrs/wk</span>
+                      <span className="flex items-center"><Clock className="w-3 h-3 mr-1" /> 14 ساعة/أسبوع | hrs/wk</span>
                     </div>
                   </div>
                 </div>
@@ -223,7 +223,7 @@ export default function TrainersPage() {
           <div className="relative bg-[#f8f9fa] rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden z-10 font-sans" dir="rtl">
             <div className="px-6 py-5 flex justify-between items-center">
               <div>
-                <h3 className="text-xl font-bold text-gray-900">{editingTrainerId ? 'تعديل مدرب' : 'إضافة مدرب'}</h3>
+                <h3 className="text-xl font-bold text-gray-900">{editingTrainerId ? 'تعديل المدرب | Edit Trainer' : 'إضافة مدرب | Add Trainer'}</h3>
               </div>
               <button 
                 className="text-gray-400 hover:text-gray-600 p-1 transition-colors"
@@ -250,19 +250,19 @@ export default function TrainersPage() {
 
                 {/* Row 2: Bio EN */}
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">السيرة الذاتية (إنجليزي)</label>
+                  <label className="block text-sm font-medium text-gray-700">السيرة الذاتية | Bio (EN)</label>
                   <textarea required value={formData.bio_en} onChange={e => setFormData({...formData, bio_en: e.target.value})} className="w-full px-4 py-3 bg-[#f8f9fa] rounded-lg border border-gray-200 focus:border-gray-300 focus:outline-none" rows={4} dir="ltr"></textarea>
                 </div>
 
                 {/* Row 3: Bio AR */}
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">السيرة الذاتية (عربي)</label>
+                  <label className="block text-sm font-medium text-gray-700">السيرة الذاتية | Bio (AR)</label>
                   <textarea required value={formData.bio_ar} onChange={e => setFormData({...formData, bio_ar: e.target.value})} className="w-full px-4 py-3 bg-[#f8f9fa] rounded-lg border border-gray-200 focus:border-gray-300 focus:outline-none" rows={4}></textarea>
                 </div>
 
                 {/* Row 4: Specialties */}
                 <div className="space-y-3">
-                  <label className="block text-sm font-medium text-gray-700">التخصصات</label>
+                  <label className="block text-sm font-medium text-gray-700">التخصصات | Specialties</label>
                   <div className="flex flex-wrap gap-2">
                     {['دروس المبتدئين', 'تدريب متقدم', 'القفز', 'الترويض', 'ركوب الطرقات', 'فصول الأطفال'].map(sp => {
                       const isSelected = formData.specialty_ar?.includes(sp);
@@ -312,7 +312,7 @@ export default function TrainersPage() {
 
                 {/* Row 6: Active Toggle */}
                 <div className="flex items-center justify-between p-4 bg-white border border-gray-100 rounded-xl mt-2">
-                  <span className="text-sm font-medium text-gray-900">نشط</span>
+                  <span className="text-sm font-medium text-gray-900">نشط | Active</span>
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input 
                       type="checkbox" 

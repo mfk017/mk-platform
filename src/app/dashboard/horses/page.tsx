@@ -144,7 +144,7 @@ export default function StableMapPage() {
         <div className="bg-surface p-6 rounded-xl border border-secondary/10 shadow-lg">
           <div className="flex justify-between items-start">
             <div>
-              <p className="font-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Total Horses</p>
+              <p className="font-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">إجمالي الخيل | Total Horses</p>
               <h3 className="font-headline-lg-mobile text-primary font-bold">{horses.length}</h3>
             </div>
           </div>
@@ -155,7 +155,7 @@ export default function StableMapPage() {
       <div className="bg-surface p-6 rounded-xl border border-secondary/10 shadow-lg flex flex-col">
         <div className="flex justify-between items-center mb-6">
           <h3 className="font-title-md text-primary flex items-center gap-2">
-            <span className="material-symbols-outlined">list_alt</span> Livery Roster
+            <span className="material-symbols-outlined">list_alt</span> قائمة الإيواء | Livery Roster
           </h3>
         </div>
 
@@ -163,10 +163,10 @@ export default function StableMapPage() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-secondary-fixed/20 border-b border-outline-variant/30">
-                <th className="font-label-xs text-on-surface-variant p-3 font-semibold">Horse</th>
-                <th className="font-label-xs text-on-surface-variant p-3 font-semibold">Breed</th>
-                <th className="font-label-xs text-on-surface-variant p-3 font-semibold">Age</th>
-                <th className="font-label-xs text-on-surface-variant p-3 text-right font-semibold">Actions</th>
+                <th className="font-label-xs text-on-surface-variant p-3 font-semibold">الخيل | Horse</th>
+                <th className="font-label-xs text-on-surface-variant p-3 font-semibold">السلالة | Breed</th>
+                <th className="font-label-xs text-on-surface-variant p-3 font-semibold">العمر | Age</th>
+                <th className="font-label-xs text-on-surface-variant p-3 text-right font-semibold">الإجراءات | Actions</th>
               </tr>
             </thead>
             <tbody className="text-body-sm divide-y divide-surface-container">
@@ -256,7 +256,7 @@ export default function StableMapPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
                   <div className="space-y-1">
-                    <label className="block text-label-sm">Horse Photo</label>
+                    <label className="block text-label-sm">صورة الخيل | Horse Photo</label>
                     <div className="flex items-center gap-3">
                       {(formData as any).image_url && (
                         <img src={(formData as any).image_url} alt="Preview" className="w-10 h-10 rounded object-cover border border-outline-variant/50" />

@@ -31,27 +31,27 @@ export default function SideNavBar() {
       <div className="flex-1 flex flex-col gap-2">
         <Link href="/hub/catalog" className="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg hover:bg-surface-container-high dark:hover:bg-surface-container-low transition-colors active:translate-x-1 transition-transform">
           <span className="material-symbols-outlined">dashboard</span>
-          <span className="font-label-sm text-label-sm">Overview</span>
+          <span className="font-label-sm text-label-sm">نظرة عامة | Overview</span>
         </Link>
         <Link href="/hub/horses" className="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg hover:bg-surface-container-high dark:hover:bg-surface-container-low transition-colors active:translate-x-1 transition-transform">
           <span className="material-symbols-outlined">bedroom_baby</span>
-          <span className="font-label-sm text-label-sm">Horses</span>
+          <span className="font-label-sm text-label-sm">الخيل | Horses</span>
         </Link>
         <Link href="/hub/trainers" className="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg hover:bg-surface-container-high dark:hover:bg-surface-container-low transition-colors active:translate-x-1 transition-transform">
           <span className="material-symbols-outlined">sports_and_outdoors</span>
-          <span className="font-label-sm text-label-sm">Trainers</span>
+          <span className="font-label-sm text-label-sm">المدربين | Trainers</span>
         </Link>
         <Link href="/hub" className="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-4 py-3 hover:bg-surface-container-high dark:hover:bg-surface-container-low transition-colors active:translate-x-1 transition-transform">
           <span className="material-symbols-outlined filled" style={{ fontVariationSettings: "'FILL' 1" }}>calendar_month</span>
-          <span className="font-label-sm text-label-sm">Bookings</span>
+          <span className="font-label-sm text-label-sm">الحجوزات | Bookings</span>
         </Link>
         <Link href="/hub/revenue" className="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg hover:bg-surface-container-high dark:hover:bg-surface-container-low transition-colors active:translate-x-1 transition-transform">
           <span className="material-symbols-outlined">payments</span>
-          <span className="font-label-sm text-label-sm">Revenue</span>
+          <span className="font-label-sm text-label-sm">المالية | Revenue</span>
         </Link>
         <Link href="/hub/settings" className="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg hover:bg-surface-container-high dark:hover:bg-surface-container-low transition-colors active:translate-x-1 transition-transform">
           <span className="material-symbols-outlined">settings</span>
-          <span className="font-label-sm text-label-sm">Settings</span>
+          <span className="font-label-sm text-label-sm">الإعدادات | Settings</span>
         </Link>
       </div>
 

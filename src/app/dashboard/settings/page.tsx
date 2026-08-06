@@ -182,7 +182,7 @@ export default function SettingsPage() {
                         onChange={handleImageUpload('logo_url')}
                         className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 transition-all cursor-pointer" 
                       />
-                      <p className="mt-1 text-xs text-slate-400">Max size 4MB. Recommended 512x512px.</p>
+                      <p className="mt-1 text-xs text-slate-400">الحد الأقصى 4 ميجا. ينصح بـ 512x512. | Max size 4MB. Recommended 512x512px.</p>
                     </div>
                   </div>
                 </FieldGroup>
@@ -199,7 +199,7 @@ export default function SettingsPage() {
                         onChange={handleImageUpload('hero_image_url')}
                         className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 transition-all cursor-pointer" 
                       />
-                      <p className="mt-1 text-xs text-slate-400">Max size 4MB. Recommended landscape ratio.</p>
+                      <p className="mt-1 text-xs text-slate-400">الحد الأقصى 4 ميجا. ينصح بشكل أفقي. | Max size 4MB. Recommended landscape ratio.</p>
                     </div>
                   </div>
                 </FieldGroup>
@@ -263,7 +263,7 @@ export default function SettingsPage() {
                   isLoading={saving}
                   leftIcon={<Save className="w-4 h-4" />}
                 >
-                  Save Changes
+                  حفظ التعديلات | Save Changes
                 </Button>
               </CardFooter>
             </Card>

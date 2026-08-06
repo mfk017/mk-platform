@@ -56,10 +56,9 @@ export default function FinancialOverviewPage() {
           </button>
           <div className="relative w-full md:w-auto hidden md:block">
             <select className="appearance-none w-full bg-surface border border-outline-variant text-on-surface py-2 pl-4 pr-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-label-sm">
-              <option>This Month (Oct 2023)</option>
-              <option>Last Month</option>
-              <option>Q3 2023</option>
-              <option>Year to Date</option>
+              <option>هذا الشهر | This Month</option>
+              <option>الشهر الماضي | Last Month</option>
+              <option>منذ بداية العام | Year to Date</option>
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-on-surface-variant">
               <ChevronDown className="w-4 h-4" />
@@ -73,7 +72,7 @@ export default function FinancialOverviewPage() {
         {/* Net Revenue */}
         <div className="bg-surface rounded-xl p-6 shadow-md border border-secondary/10 flex flex-col justify-between">
           <div className="flex justify-between items-start mb-4">
-            <h3 className="font-label-sm text-on-surface-variant uppercase tracking-wider">Net Revenue</h3>
+            <h3 className="font-label-sm text-on-surface-variant uppercase tracking-wider">صافي الأرباح | Net Revenue</h3>
             <div className="bg-primary-fixed p-1.5 rounded-full text-primary-container">
               <Wallet className="w-5 h-5" />
             </div>
@@ -84,7 +83,7 @@ export default function FinancialOverviewPage() {
             </div>
             <p className="font-label-xs text-primary mt-2 flex items-center gap-1">
               <TrendingUp className="w-3 h-3" />
-              Real data from bookings
+              بيانات حية من الحجوزات | Real data from bookings
             </p>
           </div>
         </div>
@@ -92,7 +91,7 @@ export default function FinancialOverviewPage() {
         {/* Gross Volume */}
         <div className="bg-surface rounded-xl p-6 shadow-md border border-secondary/10 flex flex-col justify-between">
           <div className="flex justify-between items-start mb-4">
-            <h3 className="font-label-sm text-on-surface-variant uppercase tracking-wider">Gross Volume</h3>
+            <h3 className="font-label-sm text-on-surface-variant uppercase tracking-wider">إجمالي المبيعات | Gross Volume</h3>
             <div className="bg-tertiary-fixed p-1.5 rounded-full text-tertiary-container">
               <TrendingUp className="w-5 h-5" />
             </div>
@@ -101,14 +100,14 @@ export default function FinancialOverviewPage() {
             <div className="flex items-end gap-2">
               <span className="font-display-lg text-on-surface text-3xl font-bold">SAR {(stats.totalRevenue + stats.totalPlatformFees)?.toLocaleString() ?? 0}</span>
             </div>
-            <p className="font-label-xs text-on-surface-variant mt-2">Total payments processed</p>
+            <p className="font-label-xs text-on-surface-variant mt-2">إجمالي المدفوعات المعالجة | Total payments processed</p>
           </div>
         </div>
 
         {/* Platform Fees */}
         <div className="bg-surface rounded-xl p-6 shadow-md border border-secondary/10 flex flex-col justify-between">
           <div className="flex justify-between items-start mb-4">
-            <h3 className="font-label-sm text-on-surface-variant uppercase tracking-wider">Platform Fees</h3>
+            <h3 className="font-label-sm text-on-surface-variant uppercase tracking-wider">رسوم المنصة | Platform Fees</h3>
             <div className="bg-error-container p-1.5 rounded-full text-error">
               <span className="font-bold text-sm">%</span>
             </div>
@@ -117,7 +116,7 @@ export default function FinancialOverviewPage() {
             <div className="flex items-end gap-2">
               <span className="font-display-lg text-on-surface text-3xl font-bold">SAR {stats.totalPlatformFees?.toLocaleString() ?? 0}</span>
             </div>
-            <p className="font-label-xs text-on-surface-variant mt-2">Deducted before payout</p>
+            <p className="font-label-xs text-on-surface-variant mt-2">مخصومة قبل التحويل | Deducted before payout</p>
           </div>
         </div>
 
@@ -133,7 +132,7 @@ export default function FinancialOverviewPage() {
             <div className="flex items-end gap-2">
               <span className="font-display-lg text-on-surface text-3xl font-bold">SAR {stats.pendingBalance?.toLocaleString() ?? 0}</span>
             </div>
-            <p className="font-label-xs text-on-surface-variant mt-2">Awaiting next payout</p>
+            <p className="font-label-xs text-on-surface-variant mt-2">بانتظار الدفعة القادمة | Awaiting next payout</p>
           </div>
         </div>
       </div>
@@ -157,12 +156,12 @@ export default function FinancialOverviewPage() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-surface-variant bg-surface-container-low font-label-sm text-on-surface-variant">
-                  <th className="p-4 font-medium">Booking ID</th>
-                  <th className="p-4 font-medium">Date</th>
-                  <th className="p-4 font-medium text-right">Gross</th>
-                  <th className="p-4 font-medium text-right">Fees (8%)</th>
-                  <th className="p-4 font-medium text-right">Net</th>
-                  <th className="p-4 font-medium">Status</th>
+                  <th className="p-4 font-medium">رقم الحجز | Booking ID</th>
+                  <th className="p-4 font-medium">التاريخ | Date</th>
+                  <th className="p-4 font-medium text-right">الإجمالي | Gross</th>
+                  <th className="p-4 font-medium text-right">الرسوم | Fees</th>
+                  <th className="p-4 font-medium text-right">الصافي | Net</th>
+                  <th className="p-4 font-medium">الحالة | Status</th>
                 </tr>
               </thead>
               <tbody className="font-body-md text-on-surface">
@@ -181,7 +180,7 @@ export default function FinancialOverviewPage() {
                         b.status === 'confirmed' ? 'bg-secondary-fixed text-on-secondary-fixed-variant' :
                         'bg-surface-variant text-on-surface-variant'
                       }`}>
-                        {b.status === 'completed' ? 'Cleared' : b.status === 'confirmed' ? 'Processing' : 'Pending'}
+                        {b.status === 'completed' ? 'مكتمل | Cleared' : b.status === 'confirmed' ? 'قيد المعالجة | Processing' : 'قيد الانتظار | Pending'}
                       </span>
                     </td>
                   </tr>
@@ -201,28 +200,28 @@ export default function FinancialOverviewPage() {
               <div className="text-primary bg-primary-container/10 p-2 rounded-lg">
                 <Wallet className="w-5 h-5" />
               </div>
-              <h3 className="font-title-md text-on-surface font-semibold">Next Payout</h3>
+              <h3 className="font-title-md text-on-surface font-semibold">الدفعة القادمة | Next Payout</h3>
             </div>
             
             <div className="mb-6">
-              <p className="font-label-sm text-on-surface-variant mb-1">Scheduled for</p>
+              <p className="font-label-sm text-on-surface-variant mb-1">مجدولة في | Scheduled for</p>
               <p className="font-headline-lg-mobile text-primary font-bold text-xl">Nov 1, 2023</p>
             </div>
 
             <div className="space-y-3 border-t border-surface-variant pt-4 mb-6">
               <div className="flex justify-between items-center">
-                <span className="font-label-sm text-on-surface-variant">Available to payout</span>
+                <span className="font-label-sm text-on-surface-variant">الرصيد المتاح للتحويل | Available to payout</span>
                 <span className="font-mono text-sm font-medium">SAR {stats.pendingBalance?.toLocaleString() ?? 0}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="font-label-sm text-on-surface-variant">Processing</span>
+                <span className="font-label-sm text-on-surface-variant">قيد المعالجة | Processing</span>
                 <span className="font-mono text-sm text-on-surface-variant">SAR 0.00</span>
               </div>
             </div>
 
             <button className="w-full mt-6 bg-primary-container text-on-primary-container font-label-sm py-3 rounded-lg hover:bg-primary-container/90 transition-colors flex justify-center items-center gap-2 font-medium">
               <Wallet className="w-4 h-4" />
-              Request Early Payout
+              طلب تحويل مبكر | Request Early Payout
             </button>
           </div>
 
@@ -235,7 +234,7 @@ export default function FinancialOverviewPage() {
                   <CreditCard className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="font-label-sm text-on-surface">Stripe Account</p>
+                  <p className="font-label-sm text-on-surface">حساب سترايب | Stripe Account</p>
                   <p className="text-body-sm text-on-surface-variant flex items-center gap-1">
                     <CheckCircle2 className="w-3 h-3 text-green-600" /> نشط وجاهز لاستقبال المدفوعات | Active and receiving payouts
                   </p>
@@ -254,7 +253,7 @@ export default function FinancialOverviewPage() {
                 <div className="text-on-surface-variant bg-surface-variant p-2 rounded-lg">
                   <CreditCard className="w-5 h-5" />
                 </div>
-                <h3 className="font-title-md text-on-surface font-semibold">Bank Details</h3>
+                <h3 className="font-title-md text-on-surface font-semibold">تفاصيل الحساب | Bank Details</h3>
               </div>
               <button className="text-primary hover:bg-primary-fixed/30 p-1.5 rounded-md transition-colors" title="Edit Bank Details">
                 <Edit className="w-4 h-4" />
@@ -263,18 +262,18 @@ export default function FinancialOverviewPage() {
 
             <div className="space-y-4">
               <div>
-                <p className="font-label-xs text-on-surface-variant uppercase tracking-wide mb-1">Bank Name</p>
+                <p className="font-label-xs text-on-surface-variant uppercase tracking-wide mb-1">اسم البنك | Bank Name</p>
                 <p className="font-body-md font-medium text-on-surface flex items-center gap-2">
                   Al Rajhi Bank
                   <span className="w-2 h-2 rounded-full bg-primary inline-block"></span>
                 </p>
               </div>
               <div>
-                <p className="font-label-xs text-on-surface-variant uppercase tracking-wide mb-1">Account Holder</p>
+                <p className="font-label-xs text-on-surface-variant uppercase tracking-wide mb-1">صاحب الحساب | Account Holder</p>
                 <p className="font-body-md text-on-surface">Al-Fursan Stable LLC</p>
               </div>
               <div>
-                <p className="font-label-xs text-on-surface-variant uppercase tracking-wide mb-1">IBAN</p>
+                <p className="font-label-xs text-on-surface-variant uppercase tracking-wide mb-1">رقم الآيبان | IBAN</p>
                 <p className="font-mono text-sm text-on-surface bg-surface-container-low p-2 rounded border border-surface-variant">
                   SA12 3456 7890 1234 5678 90
                 </p>

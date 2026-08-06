@@ -90,7 +90,7 @@ export default function BookingsPage() {
                       : 'bg-surface-container text-on-surface-variant border-outline-variant/50 hover:bg-surface-container-high'
                   }`}
                 >
-                  {st ? st.charAt(0).toUpperCase() + st.slice(1) : 'All Statuses'}
+                  {st ? (st.charAt(0).toUpperCase() + st.slice(1)) : 'كل الحالات | All Statuses'}
                 </button>
               ))}
             </div>
@@ -99,7 +99,7 @@ export default function BookingsPage() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant w-4 h-4" />
               <input 
                 className="w-full pl-10 pr-4 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none font-ibm-plex-sans text-body-md transition-shadow" 
-                placeholder="Search by ref or name..." 
+                placeholder="ابحث برقم المرجع أو الاسم... | Search by ref or name..." 
                 type="text" 
               />
             </div>
@@ -129,7 +129,7 @@ export default function BookingsPage() {
                   ) : bookings.length === 0 ? (
                     <tr>
                       <td colSpan={6} className="p-12 text-center text-on-surface-variant font-label-sm">
-                        {statusFilter ? `No ${statusFilter} bookings found.` : 'لا توجد حجوزات | No bookings found.'}
+                        {statusFilter ? `لا توجد حجوزات | No ${statusFilter} bookings found.` : 'لا توجد حجوزات | No bookings found.'}
                       </td>
                     </tr>
                   ) : (
@@ -147,7 +147,7 @@ export default function BookingsPage() {
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <div className="text-sm font-semibold text-on-surface">{b.service?.name_en || 'Unknown Service'}</div>
+                          <div className="text-sm font-semibold text-on-surface">{b.service?.name_en || 'خدمة غير معروفة | Unknown Service'}</div>
                           {b.slot && (
                             <div className="text-xs text-on-surface-variant flex items-center mt-1">
                               <Calendar className="w-3 h-3 mr-1" />
@@ -157,7 +157,7 @@ export default function BookingsPage() {
                         </td>
                         <td className="px-6 py-4 text-right">
                           <div className="font-mono font-bold text-secondary text-sm">SAR {b.net_amount_to_center}</div>
-                          <div className="text-[10px] text-on-surface-variant">Gross: SAR {b.booking_price}</div>
+                          <div className="text-[10px] text-on-surface-variant">الإجمالي | Gross: SAR {b.booking_price}</div>
                         </td>
                         <td className="px-6 py-4">
                           {getStatusBadge(b.status)}

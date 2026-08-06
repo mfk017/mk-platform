@@ -160,7 +160,7 @@ export default function PackagesPage() {
     <div className="flex-1 flex flex-col min-w-0 bg-surface h-screen overflow-hidden">
       <header className="h-20 flex items-center justify-between px-6 lg:px-8 border-b border-outline-variant/30 bg-surface-container-lowest shrink-0">
         <div>
-          <h2 className="font-display-lg text-title-md text-on-surface m-0 p-0">Service Packages</h2>
+          <h2 className="font-display-lg text-title-md text-on-surface m-0 p-0">باقات الخدمات | Service Packages</h2>
           <p className="text-body-md font-body-md text-on-surface-variant max-w-2xl">
             أدر باقات الاشتراك المجمعة التي توفر خصومات على الخدمات. قم بربط كل باقة بخدمة أساسية مثل ركوب الخيل. | Manage bundled subscription packages that offer discounts on services. Link each package to a target service like riding lessons.
           </p>
@@ -175,7 +175,7 @@ export default function PackagesPage() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant w-4 h-4" />
               <input 
                 className="w-full pl-10 pr-4 py-2 bg-surface rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none font-ibm-plex-sans text-body-md transition-shadow" 
-                placeholder="Search packages..." 
+                placeholder="ابحث في الباقات... | Search packages..." 
                 type="text" 
               />
             </div>
@@ -191,7 +191,7 @@ export default function PackagesPage() {
           {isLoading ? (
             <div className="p-12 text-center text-on-surface-variant">
               <Loader2 className="w-8 h-8 animate-spin mx-auto text-primary" />
-              <span className="block mt-4 font-label-sm">Loading packages...</span>
+              <span className="block mt-4 font-label-sm">جاري تحميل الباقات... | Loading packages...</span>
             </div>
           ) : packages.length === 0 ? (
             <div className="col-span-12 text-center py-12 text-on-surface-variant bg-surface-container-low rounded-2xl border border-outline-variant/30">
@@ -246,7 +246,7 @@ export default function PackagesPage() {
                       </div>
                       
                       <div className="mt-auto pt-4 border-t border-outline-variant/30 flex justify-between items-center text-label-xs text-on-surface-variant">
-                        <span className="flex items-center text-tertiary font-bold"><Layers className="w-3 h-3 mr-1" /> {pkg.session_count} Sessions</span>
+                        <span className="flex items-center text-tertiary font-bold"><Layers className="w-3 h-3 mr-1" /> {pkg.session_count} جلسات | Sessions</span>
                         <span className="flex items-center"><Clock className="w-3 h-3 mr-1" /> {pkg.duration_minutes}m/ea</span>
                       </div>
                     </div>
