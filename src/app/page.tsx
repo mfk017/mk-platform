@@ -79,9 +79,6 @@ export default function MarketingHomePage() {
                   {isAr ? 'سجل مركزك مجاناً' : 'Register Your Center Free'}
                   <ArrowIcon size={18} />
                 </Link>
-                <a href="#demo" className="bg-white/5 border border-white/10 hover:bg-white/10 text-white px-8 py-3.5 rounded-full text-base font-bold flex items-center gap-2 transition-all w-full sm:w-auto justify-center">
-                  {isAr ? 'شاهد العرض التوضيحي' : 'Watch Demo'}
-                </a>
               </div>
             </div>
 
