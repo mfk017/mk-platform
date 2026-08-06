@@ -27,6 +27,7 @@ export default function BottomNavBar() {
     { name: 'الإعدادات | Settings', href: '/dashboard/settings', icon: 'settings' },
   ];
 
+  return (
     <>
       {/* Slide-up Menu Drawer */}
       {isMenuOpen && (
@@ -96,4 +97,5 @@ export default function BottomNavBar() {
         </button>
       </nav>
     </>
+  );
 }

@@ -9,6 +9,8 @@ export default function ServicesManagementPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingServiceId, setEditingServiceId] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [categoryFilter, setCategoryFilter] = useState('all');
   
   // Form State
   const [formData, setFormData] = useState({
@@ -140,6 +142,7 @@ export default function ServicesManagementPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSaving(true);
     try {
       const url = editingServiceId 
         ? `/api/dashboard/services/${editingServiceId}` 
@@ -161,7 +164,6 @@ export default function ServicesManagementPage() {
     } catch (error) {
       console.error(error);
       alert('An error occurred');
-    }
     } finally {
       setIsSaving(false);
     }

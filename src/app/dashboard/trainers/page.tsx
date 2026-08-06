@@ -50,6 +50,7 @@ export default function TrainersPage() {
       name_ar: '',
       bio_en: '',
       bio_ar: '',
+      specialty_en: '',
       specialty_ar: '',
       image_url: '',
       email: '',

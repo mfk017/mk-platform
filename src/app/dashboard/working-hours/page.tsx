@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { Save, Loader2, Clock } from 'lucide-react';
 import { WorkingHoursConfig, DEFAULT_WORKING_HOURS } from '@/types/workingHours';
-import TopNavBar from '@/components/dashboard/TopNavBar';
 
 export default function WorkingHoursPage() {
   const [workingHours, setWorkingHours] = useState<WorkingHoursConfig>(DEFAULT_WORKING_HOURS);
@@ -82,7 +81,14 @@ export default function WorkingHoursPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-surface">
-      <TopNavBar title="أوقات العمل | Working Hours" subtitle="Manage your center's operating hours" />
+      <header className="h-20 flex items-center justify-between px-6 lg:px-8 border-b border-outline-variant/30 bg-surface-container-lowest shrink-0">
+        <div>
+          <h2 className="font-display-lg text-title-md text-on-surface m-0 p-0">أوقات العمل | Working Hours</h2>
+          <p className="font-ibm-plex-sans text-label-sm text-on-surface-variant hidden sm:block">
+            إدارة أوقات عمل المركز | Manage your center's operating hours
+          </p>
+        </div>
+      </header>
 
       <div className="flex-1 overflow-y-auto p-4 md:p-8">
         <div className="max-w-4xl mx-auto space-y-6 pb-24 md:pb-0">

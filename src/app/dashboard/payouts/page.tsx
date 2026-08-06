@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Download, ChevronDown, TrendingUp, Wallet, CreditCard, Info, Edit } from 'lucide-react';
+import { Download, ChevronDown, TrendingUp, Wallet, CreditCard, Info, Edit, Calendar, CheckCircle2 } from 'lucide-react';
 
 export default function FinancialOverviewPage() {
   const [data, setData] = useState<any>(null);
